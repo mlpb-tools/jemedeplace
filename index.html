@@ -1,0 +1,83 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Webinaire Mobilités – MLPB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand__mark" aria-hidden="true">MLPB</div>
+        <div class="brand__text">
+          <div class="brand__title">Webinaire Mobilités</div>
+          <div class="brand__subtitle">Support interactif – adossé à Map-Ta-Mob</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <div class="chip" id="chipSlide">Slide <strong id="slideIndex">1</strong>/<span id="slideTotal">--</span></div>
+        <button class="btn btn--ghost" id="btnOverview" type="button" title="Sommaire (O)">Sommaire</button>
+        <button class="btn btn--ghost" id="btnHelp" type="button" title="Aide (H)">Aide</button>
+      </div>
+    </header>
+
+    <!-- Slides container -->
+    <main class="deck" id="deck" aria-live="polite">
+      <!-- Slides injected by JS -->
+    </main>
+
+    <!-- Bottom nav -->
+    <footer class="bottombar">
+      <div class="bottombar__left">
+        <button class="btn" id="btnPrev" type="button" title="Précédent (←)">←</button>
+        <button class="btn" id="btnNext" type="button" title="Suivant (→)">→</button>
+        <div class="progress">
+          <div class="progress__bar" id="progressBar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="bottombar__right">
+        <button class="btn btn--ghost" id="btnCopyRecap" type="button" title="Copier le récap (C)">Copier récap</button>
+        <a class="btn btn--accent" id="btnMap" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">Ouvrir Map-Ta-Mob</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="document">
+      <div class="modal__head">
+        <div class="modal__title" id="modalTitle">Détails</div>
+        <button class="btn btn--ghost" id="modalClose" type="button" data-close="1" aria-label="Fermer">×</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+      <div class="modal__foot">
+        <button class="btn" type="button" data-close="1">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer (overview / help) -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__backdrop" data-dclose="1"></div>
+    <aside class="drawer__panel">
+      <div class="drawer__head">
+        <div class="drawer__title" id="drawerTitle">Sommaire</div>
+        <button class="btn btn--ghost" type="button" data-dclose="1" aria-label="Fermer">×</button>
+      </div>
+      <div class="drawer__body" id="drawerBody"></div>
+    </aside>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
