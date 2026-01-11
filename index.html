@@ -3,27 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Webinaire Mobilités – Support interactif</title>
+  <title>Support Webinaire – Slides plein écran</title>
 
   <!-- Font (optionnel) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg0:#07162f;
-      --bg1:#0a2346;
-      --text:#eaf2ff;
-      --muted:#b9c8e6;
-      --line:rgba(255,255,255,.12);
-      --accent:#ff7a18;
-      --accent2:#66ccff;
+      /* Look & feel "Mobinter-like" : clair, épuré, très lisible */
+      --bg:#f6f8fb;
+      --panel:#ffffff;
+      --ink:#0b1220;
+      --muted:#52607a;
+      --line:rgba(11,18,32,.10);
 
-      --shadow: 0 12px 40px rgba(0,0,0,.35);
-      --radius: 22px;
-      --radius2: 16px;
+      --accent:#ff7a18;    /* accent jeune */
+      --accent2:#1f6fff;   /* bleu dynamique */
+      --good:#15b77e;
+      --warn:#ffb020;
+
+      --shadow: 0 18px 50px rgba(11,18,32,.10);
+      --radius: 26px;
+      --radius2: 18px;
+
       --maxw: 1100px;
+      --pad: 28px;
+
+      --h1: clamp(34px, 5vw, 62px);
+      --h2: clamp(20px, 2.2vw, 28px);
+      --p:  clamp(16px, 1.4vw, 18px);
     }
 
     *{box-sizing:border-box}
@@ -31,742 +41,620 @@
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% 15%, rgba(102,204,255,.25), transparent 60%),
-        radial-gradient(900px 600px at 80% 20%, rgba(255,122,24,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow:hidden;
+      color:var(--ink);
+      background: var(--bg);
+      overflow:hidden; /* on scroll dans le container */
     }
+    a{color:inherit; text-decoration:none}
 
-    a{color:inherit}
-    .app{height:100%; display:flex; flex-direction:column}
-
+    /* Topbar minimal */
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 18px;
-      border-bottom:1px solid var(--line);
-      background: rgba(0,0,0,.18);
+      position:fixed;
+      top:0; left:0; right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 18px;
+      background: rgba(246,248,251,.92);
       backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      z-index:50;
     }
-    .brand{display:flex; gap:12px; align-items:center}
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      min-width: 260px;
+    }
     .brand__mark{
-      width:46px; height:46px; border-radius:14px;
-      display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(255,122,24,.95), rgba(102,204,255,.85));
-      color:#07162f; font-weight:900; letter-spacing:.5px;
+      width:40px; height:40px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      letter-spacing:.5px;
+      color:#fff;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
     }
-    .brand__title{font-weight:800; font-size:14px; letter-spacing:.2px}
-    .brand__subtitle{font-size:12px; color:var(--muted)}
-    .topbar__right{display:flex; gap:10px; align-items:center}
+    .brand__title{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:13px;
+      text-transform: uppercase;
+    }
+    .brand__subtitle{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .topbar__right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
 
     .chip{
       border:1px solid var(--line);
+      background:#fff;
+      border-radius: 999px;
       padding:8px 10px;
-      border-radius:999px;
-      color:var(--muted);
-      background: rgba(255,255,255,.04);
       font-size:12px;
+      color:var(--muted);
+      display:flex;
+      gap:8px;
+      align-items:center;
+      box-shadow: 0 8px 20px rgba(11,18,32,.06);
     }
-    .chip strong{color:var(--text)}
-
+    .chip b{color:var(--ink)}
     .btn{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
+      background:#fff;
+      border-radius: 999px;
       padding:10px 12px;
-      border-radius:999px;
       cursor:pointer;
-      font-weight:700;
-      letter-spacing:.2px;
-      transition: transform .05s ease, background .2s ease, border .2s ease;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+      font-weight:800;
+      font-size:12px;
+      color:var(--ink);
+      box-shadow: 0 8px 20px rgba(11,18,32,.06);
+      transition: transform .05s ease, box-shadow .2s ease, border .2s ease;
     }
-    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn:hover{box-shadow: 0 14px 32px rgba(11,18,32,.10)}
     .btn:active{transform: translateY(1px)}
-    .btn--ghost{background: rgba(255,255,255,.03)}
     .btn--accent{
-      border-color: rgba(255,122,24,.45);
-      background: linear-gradient(135deg, rgba(255,122,24,.95), rgba(255,122,24,.65));
-      color:#061427;
+      border-color: rgba(255,122,24,.35);
+      background: linear-gradient(135deg, rgba(255,122,24,.95), rgba(255,122,24,.75));
+      color:#fff;
     }
 
+    /* Container scroll "slides" */
     .deck{
-      flex:1;
-      position:relative;
+      position:fixed;
+      inset:64px 0 64px 0; /* topbar + bottombar */
+      overflow:auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior:smooth;
+    }
+
+    /* Slide = section full viewport */
+    .slide{
+      min-height: calc(100vh - 128px);
       display:grid;
       place-items:center;
-      padding:22px;
+      padding: 24px 18px;
+      scroll-snap-align: start;
     }
-    .slide{
-      width:min(var(--maxw), calc(100vw - 44px));
-      height:min(74vh, 720px);
+
+    .panel{
+      width:min(var(--maxw), 100%);
+      background: var(--panel);
+      border:1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
       box-shadow: var(--shadow);
-      overflow:hidden;
-      position:absolute;
-      opacity:0;
-      transform: translateY(18px) scale(.985);
-      transition: opacity .25s ease, transform .25s ease;
-      display:flex;
-      flex-direction:column;
-    }
-    .slide.is-active{
-      opacity:1;
-      transform: translateY(0) scale(1);
-      position:relative;
-    }
-    .slide__inner{
-      padding:26px;
+      padding: var(--pad);
       display:flex;
       flex-direction:column;
       gap:18px;
-      height:100%;
-      overflow:auto;
     }
 
+    /* Typo hierarchy */
     .kicker{
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-      color:var(--muted); font-weight:700; font-size:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:12px;
+      text-transform: uppercase;
+      letter-spacing:.6px;
     }
-    .kicker .dot{
-      width:8px; height:8px; border-radius:50%;
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
       background: var(--accent2);
-      box-shadow: 0 0 0 4px rgba(102,204,255,.12);
+      box-shadow: 0 0 0 5px rgba(31,111,255,.12);
     }
+
     .h1{
-      font-size:44px;
-      line-height:1.05;
       margin:0;
-      letter-spacing:-.6px;
+      text-align:center;
+      font-size: var(--h1);
+      line-height:1.03;
+      letter-spacing:-.8px;
+      font-weight: 900;
+      text-transform: uppercase;
     }
-    .h2{
-      font-size:26px;
+    .subtitle{
       margin:0;
-      letter-spacing:-.2px;
+      text-align:center;
+      font-size: var(--h2);
+      line-height:1.25;
+      color: var(--muted);
+      font-weight: 700;
+      max-width: 60ch;
+      margin-inline:auto;
     }
     .p{
       margin:0;
-      color:var(--muted);
-      font-size:16px;
+      font-size: var(--p);
       line-height:1.45;
-      max-width:72ch;
+      color: var(--muted);
+      max-width: 78ch;
+      margin-inline:auto;
+      text-align:center;
     }
-    .hr{height:1px; background: var(--line); width:100%}
+    .hr{
+      height:1px;
+      background: var(--line);
+      width:100%;
+      margin: 6px 0;
+    }
 
+    /* Layout blocks */
     .grid{display:grid; gap:12px}
     .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
     .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
     @media (max-width: 860px){
       .grid.cols-2,.grid.cols-3{grid-template-columns:1fr}
-      .h1{font-size:36px}
+      .topbar__right .chip{display:none}
     }
 
     .card{
       border:1px solid var(--line);
-      background: rgba(7,22,47,.55);
+      background:#fff;
       border-radius: var(--radius2);
-      padding:14px 14px;
-    }
-    .card--soft{background: rgba(255,255,255,.05)}
-    .card__title{font-weight:800; margin:0 0 6px 0}
-    .card__meta{color:var(--muted); font-size:13px; line-height:1.35}
-
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-    }
-    .badge b{color:var(--text)}
-    .badge--accent{border-color: rgba(255,122,24,.45)}
-    .badge--warn{border-color: rgba(255,209,102,.45)}
-
-    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-    .spacer{flex:1}
-
-    .list{
-      margin:0; padding:0; list-style:none;
-      display:flex; flex-direction:column; gap:10px;
-    }
-    .item{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-    }
-    .item__icon{
-      width:38px; height:38px; border-radius:14px;
-      display:grid; place-items:center;
-      background: rgba(102,204,255,.14);
-      border:1px solid rgba(102,204,255,.25);
-      flex:0 0 auto;
-      font-weight:900;
-    }
-    .item__txt{display:flex; flex-direction:column; gap:4px}
-    .item__t{font-weight:800}
-    .item__d{color:var(--muted); font-size:13px; line-height:1.35}
-
-    .callout{
-      padding:14px 16px;
-      border-radius: 18px;
-      border:1px solid rgba(255,122,24,.35);
-      background: linear-gradient(135deg, rgba(255,122,24,.12), rgba(102,204,255,.08));
-    }
-    .callout strong{color:var(--text)}
-    .callout p{margin:6px 0 0 0; color:var(--muted)}
-
-    .bottombar{
+      padding: 14px 14px;
       display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .card__t{
+      font-weight: 900;
+      letter-spacing: -.2px;
+      font-size: 16px;
+      display:flex;
+      gap:8px;
       align-items:center;
-      justify-content:space-between;
-      padding:12px 18px;
-      border-top:1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
     }
-    .bottombar__left{display:flex; align-items:center; gap:10px; width:55%}
-    .bottombar__right{display:flex; align-items:center; gap:10px}
-
-    .progress{
-      flex:1;
-      height:10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
+    .card__d{
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.35;
     }
-    .progress__bar{
-      height:100%;
-      background: linear-gradient(90deg, rgba(102,204,255,.95), rgba(255,122,24,.9));
-      width:0%;
-    }
-
-    kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      border:1px solid var(--line);
-      border-bottom-color: rgba(255,255,255,.2);
-      background: rgba(255,255,255,.06);
-      border-radius:8px;
-      padding:2px 6px;
-      font-size:12px;
-      color:var(--text);
-    }
-
-    .select{
-      width:100%;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      border-radius: 14px;
-      padding:10px 12px;
-      font-size:14px;
-      outline:none;
-    }
-    .small{font-size:12px; color:var(--muted)}
-
-    .pills{display:flex; flex-wrap:wrap; gap:8px}
+    .pillrow{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
     .pill{
       border:1px solid var(--line);
       border-radius:999px;
       padding:8px 10px;
-      background: rgba(255,255,255,.04);
-      font-weight:800;
+      background: #fff;
+      font-weight:900;
       font-size:12px;
-      user-select:none;
+      color: var(--ink);
+    }
+    .pill--good{border-color: rgba(21,183,126,.25)}
+    .pill--warn{border-color: rgba(255,176,32,.25)}
+    .pill--accent{border-color: rgba(255,122,24,.25)}
+    .pill--blue{border-color: rgba(31,111,255,.25)}
+
+    /* Simple lists, "phrases courtes" */
+    .bullets{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.45;
+    }
+    .bullets li{margin:6px 0}
+
+    /* CTA strip */
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      margin-top: 4px;
     }
 
-    .embed{
-      width:100%;
-      height:360px;
+    /* Bottom navigation */
+    .bottombar{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 18px;
+      background: rgba(246,248,251,.92);
+      backdrop-filter: blur(10px);
+      border-top:1px solid var(--line);
+      z-index:50;
+    }
+    .navleft{display:flex; gap:10px; align-items:center; width:55%}
+    .navright{display:flex; gap:10px; align-items:center}
+    .progress{
+      flex:1;
+      height:10px;
+      border-radius:999px;
+      background:#fff;
       border:1px solid var(--line);
-      border-radius: 18px;
       overflow:hidden;
-      background: rgba(0,0,0,.2);
     }
-    .embed iframe{width:100%; height:100%; border:0}
+    .progress__bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+    }
 
-    /* Modal */
-    .modal{position:fixed; inset:0; display:none}
+    /* Modal (images/ressources) */
+    .modal{position:fixed; inset:0; display:none; z-index:80}
     .modal[aria-hidden="false"]{display:block}
-    .modal__backdrop{position:absolute; inset:0; background: rgba(0,0,0,.55)}
+    .modal__backdrop{position:absolute; inset:0; background: rgba(11,18,32,.55)}
     .modal__panel{
       position:relative;
-      width:min(860px, calc(100vw - 24px));
+      width:min(980px, calc(100vw - 24px));
       max-height: calc(100vh - 24px);
       margin: 12px auto;
       border-radius: 22px;
+      background:#fff;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(7,22,47,.98), rgba(10,35,70,.98));
-      box-shadow: var(--shadow);
+      box-shadow: 0 30px 90px rgba(11,18,32,.20);
       overflow:hidden;
       display:flex;
       flex-direction:column;
     }
-    .modal__head, .modal__foot{
+    .modal__head{
       padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
       border-bottom:1px solid var(--line);
+      background: #fff;
+    }
+    .modal__title{
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing:.5px;
+    }
+    .modal__body{
+      padding:16px;
+      overflow:auto;
+      color: var(--ink);
     }
     .modal__foot{
-      border-top:1px solid var(--line);
-      border-bottom:none;
-      justify-content:flex-end;
-      gap:10px
-    }
-    .modal__title{font-weight:900}
-    .modal__body{padding:16px; overflow:auto; color:var(--text)}
-
-    /* Drawer */
-    .drawer{position:fixed; inset:0; display:none}
-    .drawer[aria-hidden="false"]{display:block}
-    .drawer__backdrop{position:absolute; inset:0; background: rgba(0,0,0,.55)}
-    .drawer__panel{
-      position:absolute; top:0; right:0;
-      height:100%;
-      width:min(460px, 92vw);
-      background: linear-gradient(180deg, rgba(7,22,47,.98), rgba(10,35,70,.98));
-      border-left:1px solid var(--line);
-      box-shadow: var(--shadow);
-      display:flex; flex-direction:column;
-    }
-    .drawer__head{
       padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      border-bottom:1px solid var(--line);
+      border-top:1px solid var(--line);
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      background:#fff;
     }
-    .drawer__title{font-weight:900}
-    .drawer__body{padding:14px 16px; overflow:auto}
-    .toc{display:flex; flex-direction:column; gap:10px}
-    .toc__btn{
-      text-align:left;
+
+    /* "Image bandeau" cliquable */
+    .banner{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      padding:12px 12px;
-      border-radius: 16px;
+      border-radius: var(--radius2);
+      background: #fff;
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       cursor:pointer;
-      font-weight:800;
+      transition: box-shadow .2s ease, transform .05s ease;
     }
-    .toc__btn small{display:block; font-weight:600; color:var(--muted); margin-top:4px}
+    .banner:hover{box-shadow: 0 16px 36px rgba(11,18,32,.12)}
+    .banner:active{transform: translateY(1px)}
+    .banner__left{display:flex; flex-direction:column; gap:4px}
+    .banner__t{font-weight:900}
+    .banner__d{color:var(--muted); font-size:13px}
+    .banner__tag{
+      font-weight:900;
+      color: var(--accent2);
+      font-size:12px;
+    }
+
+    /* Small helper */
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:10px;
+      padding:3px 7px;
+      font-size:12px;
+      font-weight:900;
+      color: var(--ink);
+    }
   </style>
 </head>
 
 <body>
-  <div class="app" id="app">
-    <!-- Top bar -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand__mark" aria-hidden="true">MLPB</div>
-        <div class="brand__text">
-          <div class="brand__title">Webinaire Mobilités</div>
-          <div class="brand__subtitle">Support interactif – adossé à Map-Ta-Mob</div>
-        </div>
+  <!-- Top -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand__mark">MLPB</div>
+      <div>
+        <div class="brand__title">Support webinaire</div>
+        <div class="brand__subtitle">Slides plein écran – style pédagogique épuré</div>
       </div>
+    </div>
 
-      <div class="topbar__right">
-        <div class="chip" id="chipSlide">Slide <strong id="slideIndex">1</strong>/<span id="slideTotal">--</span></div>
-        <button class="btn btn--ghost" id="btnOverview" type="button" title="Sommaire (O)">Sommaire</button>
-        <button class="btn btn--ghost" id="btnHelp" type="button" title="Aide (H)">Aide</button>
-      </div>
-    </header>
+    <div class="topbar__right">
+      <div class="chip">Slide <b id="slideIndex">1</b>/<span id="slideTotal">--</span></div>
+      <button class="btn" id="btnHelp" type="button">Aide</button>
+    </div>
+  </header>
 
-    <!-- Slides container -->
-    <main class="deck" id="deck" aria-live="polite"></main>
+  <!-- Deck scroll -->
+  <main class="deck" id="deck" aria-live="polite">
+    <!-- sections injected -->
+  </main>
 
-    <!-- Bottom nav -->
-    <footer class="bottombar">
-      <div class="bottombar__left">
-        <button class="btn" id="btnPrev" type="button" title="Précédent (←)">←</button>
-        <button class="btn" id="btnNext" type="button" title="Suivant (→)">→</button>
-        <div class="progress"><div class="progress__bar" id="progressBar" style="width:0%"></div></div>
-      </div>
-
-      <div class="bottombar__right">
-        <button class="btn btn--ghost" id="btnCopyRecap" type="button" title="Copier le récap (C)">Copier récap</button>
-        <a class="btn btn--accent" id="btnMap" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">Ouvrir Map-Ta-Mob</a>
-      </div>
-    </footer>
-  </div>
+  <!-- Bottom nav -->
+  <footer class="bottombar">
+    <div class="navleft">
+      <button class="btn" id="btnPrev" type="button" title="Précédent (←)">←</button>
+      <button class="btn" id="btnNext" type="button" title="Suivant (→)">→</button>
+      <div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+    </div>
+    <div class="navright">
+      <a class="btn btn--accent" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">🧭 Map-Ta-Mob</a>
+    </div>
+  </footer>
 
   <!-- Modal -->
   <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal__backdrop" data-close="1"></div>
-    <div class="modal__panel" role="document">
+    <div class="modal__panel">
       <div class="modal__head">
-        <div class="modal__title" id="modalTitle">Détails</div>
-        <button class="btn btn--ghost" id="modalClose" type="button" data-close="1" aria-label="Fermer">×</button>
+        <div class="modal__title" id="modalTitle">Ressource</div>
+        <button class="btn" data-close="1" type="button">Fermer</button>
       </div>
       <div class="modal__body" id="modalBody"></div>
       <div class="modal__foot">
-        <button class="btn" type="button" data-close="1">Fermer</button>
+        <button class="btn" data-close="1" type="button">OK</button>
       </div>
     </div>
-  </div>
-
-  <!-- Drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer__backdrop" data-dclose="1"></div>
-    <aside class="drawer__panel">
-      <div class="drawer__head">
-        <div class="drawer__title" id="drawerTitle">Sommaire</div>
-        <button class="btn btn--ghost" type="button" data-dclose="1" aria-label="Fermer">×</button>
-      </div>
-      <div class="drawer__body" id="drawerBody"></div>
-    </aside>
   </div>
 
   <script>
     (function(){
       "use strict";
 
-      // -----------------------------
-      // Aides/solutions (vulgarisées) – contenu = "1er niveau d’info"
-      // -----------------------------
-      const AIDES = {
-        dept_deplacements: {
-          title: "Aide aux déplacements (jusqu’à 450€/12 mois)",
-          tags: ["Déplacements", "Insertion"],
-          who: [
-            "Si un déplacement est indispensable pour : emploi, formation, entretien, santé, justice.",
-            "Selon évaluation sociale / conditions du fonds."
-          ],
-          what: [
-            "Aide pour payer des trajets nécessaires (véhicule perso ou covoiturage)."
-          ],
-          how: [
-            "Plafond 450 € sur 12 mois.",
-            "Calcul véhicule perso : 0,20 €/km.",
-            "Si trajets réguliers : 1 aller-retour maximum par jour.",
-            "Covoiturage possible (sur attestation)."
-          ],
-          notes: [
-            "Si formation PRF Région Nouvelle-Aquitaine : vérifier d’abord le fonds social formation."
-          ],
-          docs: [
-            "Contrat / attestation formation / convocation",
-            "Carte grise + assurance + permis",
-            "RIB"
-          ]
-        },
-
-        dept_reparation: {
-          title: "Réparation véhicule (jusqu’à 500€)",
-          tags: ["Voiture", "Réparation"],
-          who: ["Si le véhicule est indispensable au projet (emploi/formation) + évaluation sociale."],
-          what: ["Aide pour réparer une panne qui bloque ton insertion."],
-          how: [
-            "Plafond 500 €.",
-            "Reste à charge minimum 10%.",
-            "Réparation mécanique uniquement.",
-            "Exclus : entretien courant/esthétique/contrôle technique.",
-            "Paiement au garage/tiers (pas de facture déjà payée)."
-          ],
-          docs: ["Devis", "Carte grise", "Assurance", "Permis", "RIB garage/tiers"]
-        },
-
-        dept_assurance: {
-          title: "Assurance véhicule (jusqu’à 350€)",
-          tags: ["Voiture", "Assurance"],
-          who: ["Si l’assurance est un frein direct à la reprise (emploi/formation) + évaluation sociale."],
-          what: ["Aide pour payer une assurance afin de rouler légalement."],
-          how: [
-            "Plafond 350 €.",
-            "Reste à charge minimum 10%.",
-            "Sur devis ou quittance (selon cas)."
-          ],
-          docs: ["Carte grise", "Permis", "Devis / quittance"]
-        },
-
-        dept_bon_transport: {
-          title: "Bon de transport (ponctuel)",
-          tags: ["Transport", "Ponctuel"],
-          who: ["Selon situations (convocations/urgences/insertion) + évaluation sociale."],
-          what: ["Aide ponctuelle pour un trajet exceptionnel en transport en commun."],
-          how: [
-            "Prioriser les horaires les moins chers (sinon justifier).",
-            "Si déplacement en Nouvelle-Aquitaine : Carte Solidaire Région obligatoire."
-          ],
-          docs: ["Convocation / justificatif du motif", "Pièce d’identité (selon procédure)"]
-        },
-
-        dept_velo_2roues: {
-          title: "Achat vélo / 2-roues (jusqu’à 500€)",
-          tags: ["Vélo", "2-roues"],
-          who: ["Si ça débloque un projet (emploi/formation) + parcours d’insertion."],
-          what: ["Aide pour acheter un vélo, VAE ou 2-roues (selon situation)."],
-          how: [
-            "Dépenses réelles ou plafond 500 €.",
-            "Reste à charge minimum 10%.",
-            "Pour VAE : mobiliser d’abord les aides de droit commun ; l’aide vient en complément."
-          ],
-          docs: ["Devis + facture", "Justificatifs (selon achat neuf/occasion/tiers)"]
-        },
-
-        dept_code: {
-          title: "Code de la route (jusqu’à 200€)",
-          tags: ["Permis", "Code"],
-          who: ["Dans un parcours d’insertion, si le permis est un levier pour travailler/se former."],
-          what: ["Aide pour financer le code de la route."],
-          how: [
-            "Dépenses réelles ou plafond 200 €.",
-            "Reste à charge minimum 10%.",
-            "L’examen doit être présenté dans les 6 mois."
-          ],
-          docs: ["Devis code", "Attestation passage examen", "RIB"]
-        },
-
-        dept_conduite: {
-          title: "Heures de conduite (jusqu’à 35h / 90%)",
-          tags: ["Permis", "Conduite"],
-          who: ["Après obtention du code, si le permis est nécessaire au projet."],
-          what: ["Aide pour financer une partie des heures de conduite."],
-          how: [
-            "Jusqu’à 90% du coût.",
-            "Maximum 35 heures.",
-            "Heures à réaliser dans le délai prévu par la convention (8 mois).",
-            "Non pris en charge : frais dossier/inscription, évaluation, supports, heures sup."
-          ],
-          docs: ["Devis + évaluation auto-école", "Attestation code", "SIREN auto-école"]
-        },
-
-        fastt_location: {
-          title: "FASTT – SOS Location (intérimaires)",
-          tags: ["Intérim", "Location"],
-          who: ["Si tu es intérimaire au moment de la location (conditions FASTT)."],
-          what: ["Location voiture ou 2-roues à tarif réduit pour accepter une mission."],
-          how: [
-            "Voiture : 10 €/jour ; 2-roues : 3 €/jour.",
-            "Jusqu’à 60 jours/an.",
-            "Demande via espace FASTT."
-          ],
-          docs: ["Justificatif de mission", "Permis/BSR si concerné"]
-        },
-
-        ft_mobilite: {
-          title: "France Travail – aide à la mobilité",
-          tags: ["France Travail", "Entretien"],
-          who: ["Inscrit France Travail + action éligible (entretien/concours/immersion...)."],
-          what: ["Aide pour déplacements liés à la recherche d’emploi (selon conditions et barèmes)."],
-          how: [
-            "Souvent : +60 km A/R ou +2h de trajet A/R (selon règles France Travail).",
-            "Demande avec le conseiller / via procédure FT."
-          ],
-          docs: ["Convocation/action", "Justificatif domicile", "Pièces selon dossier"]
-        },
-
-        microcredit: {
-          title: "Microcrédit personnel (mobilité)",
-          tags: ["Financement", "Crédit"],
-          who: ["Si la banque refuse et que tu peux rembourser un petit crédit (accompagné)."],
-          what: ["Financer : permis, réparation, achat, besoin mobilité."],
-          how: [
-            "Montant et durée selon dossier.",
-            "Accompagnement social/budget avant et après."
-          ],
-          docs: ["Identité", "RIB", "Revenus", "Devis lié au projet"]
-        },
-
-        adie_pret: {
-          title: "ADIE – prêt mobilité",
-          tags: ["Financement", "Prêt"],
-          who: ["Si besoin mobilité + dossier de prêt possible (selon conditions ADIE)."],
-          what: ["Prêt pour financer un projet (mobilité/emploi/formation)."],
-          how: [
-            "Demande en agence ADIE.",
-            "Dossier : relevés, revenus, projet."
-          ],
-          docs: ["Identité", "RIB", "Relevés bancaires", "Justifs revenus", "Devis/projet"]
-        },
-
-        txik_solid: {
-          title: "Txik Txak – tarification solidaire",
-          tags: ["Pays Basque", "Réduction"],
-          who: ["Selon quotient familial / situation (à vérifier)."],
-          what: ["Réduction importante sur abonnements / titres réseau local."],
-          how: ["Dossier en ligne ou en agence, avec justificatifs (identité, domicile, avis d’imposition, photo)."],
-          docs: ["Pièce d’identité", "Domicile", "Avis d’imposition", "Photo"]
-        },
-
-        txik_covoit: {
-          title: "Txik Txak – covoiturage (BlaBlaCar Daily)",
-          tags: ["Covoiturage", "Gratuit passager"],
-          who: ["Usager via la plateforme partenaire (selon dispositif en vigueur)."],
-          what: ["Passager gratuit ; conducteur indemnisé (selon plafonds du dispositif)."],
-          how: ["Créer un compte + utiliser l’app BlaBlaCar Daily pour les trajets domicile-travail/formation."],
-          docs: ["Compte app", "Trajets enregistrés"]
-        },
-
-        carte_solidaire_ter: {
-          title: "Carte Solidaire TER Nouvelle-Aquitaine (SNCF)",
-          tags: ["TER", "-80%"],
-          who: ["Domicilié NA + QF sous seuil (ou statuts spécifiques)."],
-          what: ["Carte gratuite 1 an donnant -80% sur trains/cars régionaux (tarif normal)."],
-          how: [
-            "Demande en ligne (Région NA) ou par courrier.",
-            "Renouvellement avant fin de validité."
-          ],
-          docs: ["Justifs QF ou statut + identité"]
-        }
-      };
-
-      // -----------------------------
-      // Slides
-      // -----------------------------
+      // --------------------------------------------
+      // SLIDES (structure "Mobinter-like")
+      // Tu peux remplacer/compléter les contenus ici.
+      // --------------------------------------------
       const SLIDES = [
         {
-          title: "Comprendre ma mobilité pour avancer",
-          kicker: "Webinaire Mobilités • Jeunes NEET • Freins majeurs",
-          body: `
-            <p class="p"><strong>Objectif :</strong> rendre ta mobilité <b>visible</b>, puis activer des solutions <b>concrètes</b>.</p>
-            <div class="callout">
-              <strong>Principe</strong>
-              <p>On part de ta réalité (carte) puis on choisit les aides adaptées.</p>
+          kicker: "🧭 WEBINAIRE MOBILITÉ",
+          title: "COMPRENDRE MA MOBILITÉ",
+          subtitle: "Quand se déplacer devient un frein… on peut agir.",
+          content: `
+            <div class="pillrow">
+              <span class="pill pill--blue">✅ clair</span>
+              <span class="pill pill--accent">✅ concret</span>
+              <span class="pill pill--good">✅ utile</span>
             </div>
+            <p class="p">On va faire 2 choses : <b>visualiser</b> ta mobilité (sur une carte) et <b>activer</b> des solutions simples.</p>
+            <div class="cta">
+              <span class="pill">⏳ 60–90 min</span>
+              <span class="pill">📝 messages courts</span>
+              <span class="pill">➡️ 1 plan d’action</span>
+            </div>
+          `
+        },
+        {
+          kicker: "🎯 OBJECTIFS",
+          title: "AUJOURD’HUI",
+          subtitle: "Ce que tu dois obtenir à la fin.",
+          content: `
             <div class="grid cols-3">
-              <div class="card"><div class="card__title">🗺️ 1) Je trace</div><div class="card__meta">D’où je pars, où je dois aller, comment, quand.</div></div>
-              <div class="card"><div class="card__title">🧩 2) Je comprends</div><div class="card__meta">Mes freins : horaires, coût, fatigue, dépendance.</div></div>
-              <div class="card"><div class="card__title">🚀 3) J’active</div><div class="card__meta">Solutions : transport, permis, vélo, aides, prêt…</div></div>
-            </div>
-          `
-        },
-        {
-          title: "Map-Ta-Mob : la carte de ta réalité",
-          kicker: "Outil pédagogique • pas un test",
-          body: `
-            <p class="p">Tu ne “rates” rien. On veut juste voir <b>ce qui bloque</b> et <b>ce qui est possible</b>.</p>
-            <div class="grid cols-2">
-              <div class="card card--soft">
-                <div class="card__title">📍 Ce que tu places</div>
-                <div class="card__meta">
-                  • Point de départ<br>
-                  • Lieux importants<br>
-                  • Moyens actuels<br>
-                  • Freins réels
-                </div>
-              </div>
-              <div class="card card--soft">
-                <div class="card__title">✅ Ce que tu obtiens</div>
-                <div class="card__meta">
-                  • Diagnostic clair<br>
-                  • Solutions par situation<br>
-                  • RDV conseiller plus efficace
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <a class="btn btn--accent" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">Ouvrir Map-Ta-Mob</a>
-              <span class="badge"><b>Raccourci</b> : <kbd>M</kbd></span>
-            </div>
-          `
-        },
-        {
-          title: "Diagnostic express (2 minutes)",
-          kicker: "Mini quiz",
-          body: `
-            <p class="p">Réponds vite : ça nous aide à t’orienter vers les bonnes solutions.</p>
-            <div class="grid cols-2">
               <div class="card">
-                <div class="card__title">1) Distance principale</div>
-                <select class="select" id="qDistance">
-                  <option value="">— Choisir —</option>
-                  <option value="court">0–5 km</option>
-                  <option value="moyen">5–20 km</option>
-                  <option value="loin">20 km+</option>
-                </select>
-                <div class="small">Ex : maison → travail/formation</div>
+                <div class="card__t">✅ 1) Comprendre</div>
+                <div class="card__d">Pourquoi ta mobilité bloque ton insertion.</div>
               </div>
               <div class="card">
-                <div class="card__title">2) Ton frein #1</div>
-                <select class="select" id="qFrein">
-                  <option value="">— Choisir —</option>
-                  <option value="cout">Coût</option>
-                  <option value="horaires">Horaires</option>
-                  <option value="pasdevehicule">Pas de véhicule</option>
-                  <option value="fatigue">Fatigue / stress</option>
-                </select>
-                <div class="small">On te propose 2–3 pistes</div>
+                <div class="card__t">🗺️ 2) Visualiser</div>
+                <div class="card__d">Ta réalité sur une carte (Map-Ta-Mob).</div>
+              </div>
+              <div class="card">
+                <div class="card__t">🚀 3) Agir</div>
+                <div class="card__d">Choisir une solution + une aide possible.</div>
               </div>
             </div>
-            <div class="row">
-              <button class="btn btn--accent" id="btnQuiz" type="button">Voir mes pistes</button>
-              <span class="badge badge--warn" id="quizResult">—</span>
+            <div class="hr"></div>
+            <ul class="bullets">
+              <li>Pas un test. Pas de jugement.</li>
+              <li>On cherche <b>le plus réaliste</b> (maintenant) + <b>le plus durable</b> (après).</li>
+            </ul>
+          `
+        },
+        {
+          kicker: "🧩 ACTIVITÉ",
+          title: "MAP-TA-MOB",
+          subtitle: "On dessine ta mobilité réelle.",
+          content: `
+            <div class="grid cols-2">
+              <div class="card">
+                <div class="card__t">📝 Consigne</div>
+                <div class="card__d">Place : départ, lieux importants, moyens actuels, freins.</div>
+              </div>
+              <div class="card">
+                <div class="card__t">⏳ Timing</div>
+                <div class="card__d">10 minutes (puis on débriefe ensemble).</div>
+              </div>
+            </div>
+            <div class="cta">
+              <a class="btn btn--accent" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">🧭 Ouvrir Map-Ta-Mob</a>
+              <span class="pill">Astuce : 1 lieu = 1 point</span>
             </div>
           `
         },
         {
-          title: "Map-Ta-Mob (option) : affichage direct",
-          kicker: "Embed • selon navigateur/réseau",
-          body: `
-            <p class="p">Si l’affichage est bloqué, ouvre Map-Ta-Mob dans un onglet.</p>
-            <div class="embed">
-              <iframe src="https://mlpb-tools.github.io/Map-Ta-Mob/" title="Map-Ta-Mob"></iframe>
-            </div>
-          `
-        },
-        {
-          title: "On passe aux solutions (selon ta carte)",
-          kicker: "Book Mobilités 2025 • vulgarisé",
-          body: `
-            <p class="p">Tu vas voir des solutions <b>utiles</b> : à quoi ça sert, pour qui, comment, quelles pièces.</p>
-            <div class="grid cols-3">
-              <div class="card"><div class="card__title">🚗 Voiture</div><div class="card__meta">Déplacements, assurance, réparation, location.</div></div>
-              <div class="card"><div class="card__title">🚌 Transport</div><div class="card__meta">Txik Txak, TER, carte solidaire, covoiturage.</div></div>
-              <div class="card"><div class="card__title">🪪 Permis</div><div class="card__meta">Code + conduite + solutions de financement.</div></div>
-            </div>
-            <div class="callout">
-              <strong>Important</strong>
-              <p>On active une solution si elle débloque emploi/formation/démarches, pas “juste pour avoir un véhicule”.</p>
+          kicker: "🧠 DIAGNOSTIC",
+          title: "CE QUI BLOQUE",
+          subtitle: "On met des mots simples sur tes freins.",
+          content: `
+            <div class="grid cols-2">
+              <div class="card">
+                <div class="card__t">💸 Coût</div>
+                <div class="card__d">Trop cher → pas possible sur la durée.</div>
+              </div>
+              <div class="card">
+                <div class="card__t">⏳ Horaires</div>
+                <div class="card__d">Correspondances / première / dernière.</div>
+              </div>
+              <div class="card">
+                <div class="card__t">🚫 Pas de véhicule</div>
+                <div class="card__d">Dépendance, impossibilité d’accepter.</div>
+              </div>
+              <div class="card">
+                <div class="card__t">😮‍💨 Fatigue / stress</div>
+                <div class="card__d">Trop compliqué → on simplifie.</div>
+              </div>
             </div>
           `
         },
 
-        // --- Slides “solutions” ---
-        aidSlide("dept_deplacements", "Quand tu dois te déplacer pour un truc important (emploi/formation/médical/justice/entretien)."),
-        aidSlide("dept_reparation", "Quand ton véhicule est indispensable et qu’une panne bloque tout."),
-        aidSlide("dept_assurance", "Quand l’assurance t’empêche de rouler légalement pour ton projet."),
-        aidSlide("dept_bon_transport", "Quand tu as un déplacement exceptionnel et aucune solution."),
-        aidSlide("dept_velo_2roues", "Quand un vélo/2-roues suffit pour tenir dans la durée."),
-        aidSlide("dept_code", "Quand le code est le premier gros blocage."),
-        aidSlide("dept_conduite", "Après le code, pour financer une partie des heures."),
-        aidSlide("fastt_location", "Si tu es intérimaire et qu’il te manque un véhicule pour une mission."),
-        aidSlide("ft_mobilite", "Si tu dois te déplacer loin pour une action de recherche d’emploi."),
-        aidSlide("microcredit", "Si tu as besoin d’un financement (permis/réparation) et que la banque refuse."),
-        aidSlide("adie_pret", "Si un prêt mobilité est envisageable (selon conditions)."),
-        aidSlide("txik_solid", "Si le prix du réseau local est ton frein principal."),
-        aidSlide("txik_covoit", "Si les horaires bus ne collent pas et qu’un covoit est possible."),
-        aidSlide("carte_solidaire_ter", "Si tu dois utiliser TER/cars régionaux et que tu es éligible."),
+        // Ressources (bandeaux cliquables -> modal)
+        {
+          kicker: "📚 RESSOURCES",
+          title: "LES SOLUTIONS",
+          subtitle: "Clique pour ouvrir une fiche (simple).",
+          content: `
+            <div class="banner" data-modal="1" data-title="✅ Aide déplacements" data-body="Aide financière pour des trajets indispensables (emploi/formation/médical/justice/entretien). Plafond annuel : voir conditions avec ton conseiller.">
+              <div class="banner__left">
+                <div class="banner__t">✅ Aide aux déplacements</div>
+                <div class="banner__d">Quand tu dois bouger pour un truc important.</div>
+              </div>
+              <div class="banner__tag">ouvrir →</div>
+            </div>
+
+            <div class="banner" data-modal="1" data-title="🚗 Réparation / assurance" data-body="Aides possibles si ton véhicule est indispensable (réparation, assurance). Toujours sur dossier + justificatifs.">
+              <div class="banner__left">
+                <div class="banner__t">🚗 Voiture : réparation / assurance</div>
+                <div class="banner__d">Quand une panne ou l’assurance bloque tout.</div>
+              </div>
+              <div class="banner__tag">ouvrir →</div>
+            </div>
+
+            <div class="banner" data-modal="1" data-title="🚌 Tarification solidaire" data-body="Réductions possibles sur les transports (selon situation). Vérifier éligibilité et justificatifs.">
+              <div class="banner__left">
+                <div class="banner__t">🚌 Transports : tarification solidaire</div>
+                <div class="banner__d">Quand le prix est le frein principal.</div>
+              </div>
+              <div class="banner__tag">ouvrir →</div>
+            </div>
+
+            <div class="banner" data-modal="1" data-title="🪪 Permis : code / conduite" data-body="Solutions pour financer le code et/ou des heures (selon conditions). Objectif : débloquer emploi/formation.">
+              <div class="banner__left">
+                <div class="banner__t">🪪 Permis : code / conduite</div>
+                <div class="banner__d">Quand le permis est nécessaire au projet.</div>
+              </div>
+              <div class="banner__tag">ouvrir →</div>
+            </div>
+          `
+        },
 
         {
-          title: "Plan d’action (simple)",
-          kicker: "En 3 étapes",
-          body: `
+          kicker: "📝 MODULE MÉTHODO",
+          title: "CANDIDATURE",
+          subtitle: "Se déplacer… c’est aussi savoir s’organiser.",
+          content: `
+            <div class="grid cols-2">
+              <div class="card">
+                <div class="card__t">✅ Avant</div>
+                <div class="card__d">Je vérifie le trajet + je prévois un plan B.</div>
+              </div>
+              <div class="card">
+                <div class="card__t">⏳ Le jour J</div>
+                <div class="card__d">J’anticipe 15–20 min + je garde un numéro utile.</div>
+              </div>
+            </div>
+            <ul class="bullets">
+              <li>“Je peux venir” = je sais <b>comment</b> venir.</li>
+              <li>Si imprévu : j’envoie un message <b>tout de suite</b>.</li>
+            </ul>
+          `
+        },
+
+        {
+          kicker: "🤝 ACTIVITÉ GROUPE",
+          title: "PLAN B",
+          subtitle: "En 3 minutes, trouve une alternative réaliste.",
+          content: `
             <div class="grid cols-3">
-              <div class="card"><div class="card__title">1) Je clarifie</div><div class="card__meta">Je termine Map-Ta-Mob + je note mon frein #1.</div></div>
-              <div class="card"><div class="card__title">2) Je choisis</div><div class="card__meta">1 solution rapide + 1 solution durable.</div></div>
-              <div class="card"><div class="card__title">3) J’active</div><div class="card__meta">Je prépare les pièces + je prends un RDV.</div></div>
+              <div class="card"><div class="card__t">1) Si bus impossible</div><div class="card__d">→ covoit / TAD / combo</div></div>
+              <div class="card"><div class="card__t">2) Si trop cher</div><div class="card__d">→ tarif solidaire / aide</div></div>
+              <div class="card"><div class="card__t">3) Si fatigue/stress</div><div class="card__d">→ simplifier 1 chose</div></div>
             </div>
-            <div class="row">
-              <button class="btn btn--accent" id="btnBuildRecap" type="button">Préparer mon récap</button>
-              <span class="badge" id="recapStatus">—</span>
+            <div class="cta">
+              <span class="pill">📝 1 phrase : “Mon plan B c’est…”</span>
             </div>
+          `
+        },
+
+        {
+          kicker: "🧾 FIN",
+          title: "QUESTIONNAIRE",
+          subtitle: "Dernière étape : on te recontacte si besoin.",
+          content: `
+            <p class="p">Complète le formulaire de fin : <b>ça nous permet de t’aider vite</b>.</p>
+            <div class="cta">
+              <a class="btn btn--accent" href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noreferrer">🧩 Je complète</a>
+              <span class="pill">✅ programme</span>
+              <span class="pill">✅ destination</span>
+              <span class="pill">✅ besoin d’aide (oui/non)</span>
+            </div>
+            <div class="hr"></div>
+            <p class="p"><b>Raccourcis</b> : <span class="kbd">↑/↓</span> scroll • <span class="kbd">←/→</span> slide • <span class="kbd">Esc</span> fermer</p>
           `
         }
       ];
 
-      // -----------------------------
-      // Helpers
-      // -----------------------------
+      // --------------------------------------------
+      // Render
+      // --------------------------------------------
+      const deck = document.getElementById("deck");
+      const slideIndexEl = document.getElementById("slideIndex");
+      const slideTotalEl = document.getElementById("slideTotal");
+      const progressBar = document.getElementById("progressBar");
+      const btnPrev = document.getElementById("btnPrev");
+      const btnNext = document.getElementById("btnNext");
+      const btnHelp = document.getElementById("btnHelp");
+
+      const modal = document.getElementById("modal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBody = document.getElementById("modalBody");
+
+      let current = 0;
+      let slideEls = [];
+
       function escapeHtml(s){
         return String(s)
           .replaceAll("&","&amp;")
@@ -776,118 +664,60 @@
           .replaceAll("'","&#039;");
       }
 
-      function aidSlide(aidKey, intro){
-        const a = AIDES[aidKey];
-        return {
-          title: a.title,
-          kicker: (a.tags || []).join(" • "),
-          body: `
-            <p class="p">${escapeHtml(intro)}</p>
-            <div class="row">
-              ${(a.tags||[]).map(t=>`<span class="badge badge--accent"><b>${escapeHtml(t)}</b></span>`).join("")}
-              <span class="badge"><b>Conseil</b> : clique sur “Voir en fiche”</span>
-            </div>
-
-            <div class="grid cols-2">
-              <div class="card">
-                <div class="card__title">🧠 Pour qui ?</div>
-                <div class="card__meta">${(a.who||[]).map(x=>`• ${escapeHtml(x)}`).join("<br>")}</div>
-              </div>
-              <div class="card">
-                <div class="card__title">🎁 À quoi ça sert ?</div>
-                <div class="card__meta">${(a.what||[]).map(x=>`• ${escapeHtml(x)}`).join("<br>")}</div>
-              </div>
-            </div>
-
-            <div class="grid cols-2">
-              <div class="card">
-                <div class="card__title">🛠️ Comment ça marche ?</div>
-                <div class="card__meta">${(a.how||[]).map(x=>`• ${escapeHtml(x)}`).join("<br>")}</div>
-              </div>
-              <div class="card">
-                <div class="card__title">📄 Pièces utiles</div>
-                <div class="card__meta">
-                  <div class="pills">
-                    ${(a.docs||[]).map(d=>`<span class="pill">${escapeHtml(d)}</span>`).join("") || `<span class="small">—</span>`}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            ${(a.notes && a.notes.length) ? `
-              <div class="callout">
-                <strong>À savoir</strong>
-                <p>${a.notes.map(escapeHtml).join("<br>")}</p>
-              </div>
-            ` : ""}
-
-            <div class="row">
-              <button class="btn" type="button" data-open-aid="${escapeHtml(aidKey)}">Voir en fiche</button>
-            </div>
-          `
-        };
-      }
-
-      // -----------------------------
-      // Rendering + UI
-      // -----------------------------
-      const deck = document.getElementById("deck");
-      const slideIndexEl = document.getElementById("slideIndex");
-      const slideTotalEl = document.getElementById("slideTotal");
-      const progressBar = document.getElementById("progressBar");
-      const btnPrev = document.getElementById("btnPrev");
-      const btnNext = document.getElementById("btnNext");
-      const btnOverview = document.getElementById("btnOverview");
-      const btnHelp = document.getElementById("btnHelp");
-      const btnCopyRecap = document.getElementById("btnCopyRecap");
-
-      const modal = document.getElementById("modal");
-      const modalTitle = document.getElementById("modalTitle");
-      const modalBody = document.getElementById("modalBody");
-      const modalClose = document.getElementById("modalClose");
-
-      const drawer = document.getElementById("drawer");
-      const drawerTitle = document.getElementById("drawerTitle");
-      const drawerBody = document.getElementById("drawerBody");
-
-      let idx = 0;
-
       function renderSlides(){
         deck.innerHTML = SLIDES.map((s, i) => `
-          <section class="slide ${i===0 ? "is-active" : ""}" data-i="${i}" aria-label="Slide ${i+1}">
-            <div class="slide__inner">
+          <section class="slide" data-i="${i}">
+            <div class="panel">
               <div class="kicker"><span class="dot"></span> ${escapeHtml(s.kicker || "")}</div>
-              <h1 class="${(i===0 || (s.title||"").length<36) ? "h1" : "h2"}">${escapeHtml(s.title || "")}</h1>
+              <h1 class="h1">${escapeHtml(s.title || "")}</h1>
+              <p class="subtitle">${escapeHtml(s.subtitle || "")}</p>
               <div class="hr"></div>
-              <div class="content">${s.body || ""}</div>
-              <div class="spacer"></div>
-              <div class="row">
-                <span class="badge"><b>Navigation</b> : <kbd>←</kbd> <kbd>→</kbd> • <kbd>O</kbd> sommaire • <kbd>H</kbd> aide • <kbd>C</kbd> copier récap</span>
-              </div>
+              <div>${s.content || ""}</div>
             </div>
           </section>
         `).join("");
 
+        slideEls = Array.from(deck.querySelectorAll(".slide"));
         slideTotalEl.textContent = String(SLIDES.length);
-        updateUI();
+        updateFromScroll(); // init
       }
 
-      function goto(i){
-        const next = Math.max(0, Math.min(SLIDES.length-1, i));
-        if(next === idx) return;
-
-        const curEl = deck.querySelector(`.slide[data-i="${idx}"]`);
-        const nextEl = deck.querySelector(`.slide[data-i="${next}"]`);
-        if(curEl) curEl.classList.remove("is-active");
-        if(nextEl) nextEl.classList.add("is-active");
-        idx = next;
-        updateUI();
+      function scrollToSlide(i){
+        const next = Math.max(0, Math.min(SLIDES.length - 1, i));
+        const el = slideEls[next];
+        if(!el) return;
+        el.scrollIntoView({behavior:"smooth", block:"start"});
       }
 
       function updateUI(){
-        slideIndexEl.textContent = String(idx + 1);
-        const pct = ((idx+1) / SLIDES.length) * 100;
+        slideIndexEl.textContent = String(current + 1);
+        const pct = ((current + 1) / SLIDES.length) * 100;
         progressBar.style.width = pct.toFixed(2) + "%";
+      }
+
+      // Observe which slide is visible (snap)
+      function updateFromScroll(){
+        const rectDeck = deck.getBoundingClientRect();
+        const midY = rectDeck.top + rectDeck.height * 0.35;
+
+        let best = 0;
+        let bestDist = Infinity;
+
+        slideEls.forEach((el, i) => {
+          const r = el.getBoundingClientRect();
+          const dist = Math.abs((r.top + r.height * 0.25) - midY);
+          if(dist < bestDist){
+            bestDist = dist;
+            best = i;
+          }
+        });
+
+        if(best !== current){
+          current = best;
+          updateUI();
+        }else{
+          updateUI();
+        }
       }
 
       // Modal
@@ -901,245 +731,66 @@
         modalBody.innerHTML = "";
       }
 
+      // Events
+      deck.addEventListener("scroll", () => {
+        // throttle via rAF
+        window.requestAnimationFrame(updateFromScroll);
+      });
+
+      btnPrev.addEventListener("click", ()=>scrollToSlide(current - 1));
+      btnNext.addEventListener("click", ()=>scrollToSlide(current + 1));
+
+      btnHelp.addEventListener("click", ()=>{
+        openModal("AIDE", `
+          <div class="card">
+            <div class="card__t">🧭 Navigation</div>
+            <div class="card__d">
+              • Scroll pour avancer<br>
+              • <b>←</b>/<b>→</b> : slide précédente/suivante<br>
+              • <b>Esc</b> : fermer les fenêtres<br>
+              • Clique sur les bandeaux “Ressources” pour ouvrir une fiche
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__t">📝 Conseils visio</div>
+            <div class="card__d">
+              • Gros titres, messages courts<br>
+              • 1 idée par slide<br>
+              • Beaucoup d’air (lisible sur Teams)
+            </div>
+          </div>
+        `);
+      });
+
+      // Modal close
       modal.addEventListener("click", (e)=>{
         const t = e.target;
         if(t && t.getAttribute && t.getAttribute("data-close")==="1") closeModal();
       });
-      modalClose.addEventListener("click", closeModal);
 
-      // Drawer
-      function openDrawer(title, html){
-        drawerTitle.textContent = title;
-        drawerBody.innerHTML = html;
-        drawer.setAttribute("aria-hidden","false");
-      }
-      function closeDrawer(){
-        drawer.setAttribute("aria-hidden","true");
-        drawerBody.innerHTML = "";
-      }
-      drawer.addEventListener("click",(e)=>{
-        const t = e.target;
-        if(t && t.getAttribute && t.getAttribute("data-dclose")==="1") closeDrawer();
-      });
-
-      function buildTOC(){
-        return `
-          <div class="toc">
-            ${SLIDES.map((s,i)=>`
-              <button class="toc__btn" type="button" data-goto="${i}">
-                ${escapeHtml(s.title || ("Slide "+(i+1)))}
-                <small>${escapeHtml(s.kicker || "")}</small>
-              </button>
-            `).join("")}
-          </div>
-        `;
-      }
-
-      function buildHelp(){
-        return `
-          <div class="card">
-            <div class="card__title">Raccourcis</div>
-            <div class="card__meta">
-              <div class="row">
-                <span class="badge"><b>←</b>/<b>→</b> : slide</span>
-                <span class="badge"><b>O</b> : sommaire</span>
-                <span class="badge"><b>H</b> : aide</span>
-                <span class="badge"><b>C</b> : copier récap</span>
-                <span class="badge"><b>M</b> : Map-Ta-Mob</span>
-                <span class="badge"><b>Esc</b> : fermer</span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card__title">Mode d’emploi</div>
-            <div class="card__meta">
-              1) Remplis Map-Ta-Mob.<br>
-              2) Reviens ici et ouvre les fiches (bouton “Voir en fiche”).<br>
-              3) Copie ton récap en fin de webinaire.
-            </div>
-          </div>
-        `;
-      }
-
-      // Recap
-      function getRecapText(){
-        const qD = document.getElementById("qDistance")?.value || "";
-        const qF = document.getElementById("qFrein")?.value || "";
-        const quiz = document.getElementById("quizResult")?.textContent || "";
-
-        const lines = [];
-        lines.push("RÉCAP MOBILITÉ – Webinaire");
-        if(qD) lines.push(`- Distance : ${qD}`);
-        if(qF) lines.push(`- Frein principal : ${qF}`);
-        if(quiz && quiz!=="—") lines.push(`- Pistes : ${quiz}`);
-        lines.push("");
-        lines.push("Map-Ta-Mob : https://mlpb-tools.github.io/Map-Ta-Mob/");
-        lines.push("");
-        lines.push("Solutions vues :");
-        Object.values(AIDES).forEach(a => lines.push(`- ${a.title}`));
-        return lines.join("\n");
-      }
-
-      async function copyRecap(){
-        const txt = getRecapText();
-        try{
-          await navigator.clipboard.writeText(txt);
-          toast("Récap copié ✅");
-        }catch{
-          openModal("Copier le récap", `<pre style="white-space:pre-wrap; margin:0">${escapeHtml(txt)}</pre>`);
-        }
-      }
-
-      // Toast
-      let toastTimer = null;
-      function toast(msg){
-        clearTimeout(toastTimer);
-        const el = document.createElement("div");
-        el.className = "chip";
-        el.style.position = "fixed";
-        el.style.left = "18px";
-        el.style.bottom = "64px";
-        el.style.zIndex = "9999";
-        el.style.background = "rgba(0,0,0,.35)";
-        el.style.backdropFilter = "blur(10px)";
-        el.innerHTML = msg;
-        document.body.appendChild(el);
-        toastTimer = setTimeout(()=> el.remove(), 1800);
-      }
-
-      // Events
-      btnPrev.addEventListener("click", ()=>goto(idx-1));
-      btnNext.addEventListener("click", ()=>goto(idx+1));
-      btnOverview.addEventListener("click", ()=>openDrawer("Sommaire", buildTOC()));
-      btnHelp.addEventListener("click", ()=>openDrawer("Aide", buildHelp()));
-      btnCopyRecap.addEventListener("click", copyRecap);
-
-      // Click delegation (TOC, open fiche, quiz, recap)
+      // Click delegation for banners
       document.addEventListener("click", (e)=>{
-        const t = e.target;
-
-        // TOC goto
-        const g = t?.getAttribute?.("data-goto");
-        if(g !== null && g !== undefined){
-          const i = Number(g);
-          if(Number.isFinite(i)){
-            closeDrawer();
-            goto(i);
-          }
-        }
-
-        // Open fiche modal
-        const aidKey = t?.getAttribute?.("data-open-aid");
-        if(aidKey && AIDES[aidKey]){
-          const a = AIDES[aidKey];
-          openModal(a.title, `
-            <div class="card">
-              <div class="card__title">🎁 À quoi ça sert ?</div>
-              <div class="card__meta">${(a.what||[]).map(escapeHtml).join("<br>")}</div>
-            </div>
-            <div class="card">
-              <div class="card__title">🧠 Pour qui ?</div>
-              <div class="card__meta">${(a.who||[]).map(escapeHtml).join("<br>")}</div>
-            </div>
-            <div class="card">
-              <div class="card__title">🛠️ Comment ?</div>
-              <div class="card__meta">${(a.how||[]).map(escapeHtml).join("<br>")}</div>
-            </div>
-            ${(a.notes && a.notes.length) ? `
-              <div class="card">
-                <div class="card__title">ℹ️ À savoir</div>
-                <div class="card__meta">${a.notes.map(escapeHtml).join("<br>")}</div>
-              </div>
-            ` : ""}
-            ${(a.docs && a.docs.length) ? `
-              <div class="card">
-                <div class="card__title">📄 Pièces utiles</div>
-                <div class="card__meta">${a.docs.map(escapeHtml).join("<br>")}</div>
-              </div>
-            ` : ""}
-          `);
-        }
-
-        // Quiz
-        if(t && t.id === "btnQuiz"){
-          const d = document.getElementById("qDistance")?.value || "";
-          const f = document.getElementById("qFrein")?.value || "";
-          const out = document.getElementById("quizResult");
-          if(!out) return;
-
-          if(!d || !f){
-            out.textContent = "Choisis distance + frein 👆";
-            return;
-          }
-
-          const picks = [];
-          if(d === "court"){
-            picks.push("Vélo/2-roues (si réaliste)");
-            picks.push("Txik Txak (tarif solidaire)");
-          }else if(d === "moyen"){
-            picks.push("Txik Txak + covoiturage");
-            picks.push("Aide déplacements (si motif insertion)");
-          }else{
-            picks.push("Covoiturage / voiture (si indispensable)");
-            picks.push("Aide France Travail (si éligible)");
-          }
-
-          if(f === "cout") picks.unshift("Carte solidaire TER / tarif solidaire");
-          if(f === "horaires") picks.unshift("Covoiturage (BlaBlaCar Daily) / solutions mixtes");
-          if(f === "pasdevehicule") picks.unshift("FASTT (si intérim) / transport + covoit");
-          if(f === "fatigue") picks.unshift("1 solution simple + accompagnement");
-
-          out.textContent = picks.slice(0,3).join(" • ");
-          toast("Pistes affichées ✅");
-        }
-
-        // Build recap status
-        if(t && t.id === "btnBuildRecap"){
-          const s = document.getElementById("recapStatus");
-          if(s) s.textContent = "OK → clique “Copier récap” en bas";
-          toast("Récap prêt ✅");
-        }
+        const el = e.target.closest?.("[data-modal='1']");
+        if(!el) return;
+        const title = el.getAttribute("data-title") || "Ressource";
+        const body  = el.getAttribute("data-body") || "";
+        openModal(title, `<p style="margin:0; color:#52607a; font-size:16px; line-height:1.45">${escapeHtml(body)}</p>`);
       });
 
-      // Keyboard
+      // Keyboard navigation
       document.addEventListener("keydown", (e)=>{
-        if(e.key === "ArrowRight") goto(idx+1);
-        if(e.key === "ArrowLeft") goto(idx-1);
-        if(e.key === "Escape"){ closeModal(); closeDrawer(); }
-        if(e.key.toLowerCase() === "o") openDrawer("Sommaire", buildTOC());
-        if(e.key.toLowerCase() === "h") openDrawer("Aide", buildHelp());
-        if(e.key.toLowerCase() === "c") copyRecap();
-        if(e.key.toLowerCase() === "m") window.open("https://mlpb-tools.github.io/Map-Ta-Mob/", "_blank", "noreferrer");
+        if(modal.getAttribute("aria-hidden")==="false" && e.key === "Escape") closeModal();
+
+        if(e.key === "ArrowRight") scrollToSlide(current + 1);
+        if(e.key === "ArrowLeft") scrollToSlide(current - 1);
+
+        // Optional: up/down jump slide (not per pixel)
+        if(e.key === "ArrowDown") scrollToSlide(current + 1);
+        if(e.key === "ArrowUp") scrollToSlide(current - 1);
       });
 
       // Init
-      render();
-
-      function render(){
-        deck.innerHTML = SLIDES.map((s, i) => `
-          <section class="slide ${i===0 ? "is-active" : ""}" data-i="${i}" aria-label="Slide ${i+1}">
-            <div class="slide__inner">
-              <div class="kicker"><span class="dot"></span> ${escapeHtml(s.kicker || "")}</div>
-              <h1 class="${(i===0 || (s.title||"").length<36) ? "h1" : "h2"}">${escapeHtml(s.title || "")}</h1>
-              <div class="hr"></div>
-              <div class="content">${s.body || ""}</div>
-              <div class="spacer"></div>
-              <div class="row">
-                <span class="badge"><b>Navigation</b> : <kbd>←</kbd> <kbd>→</kbd> • <kbd>O</kbd> sommaire • <kbd>H</kbd> aide • <kbd>C</kbd> copier récap</span>
-              </div>
-            </div>
-          </section>
-        `).join("");
-
-        slideTotalEl.textContent = String(SLIDES.length);
-        updateUI();
-      }
-
-      function updateUI(){
-        slideIndexEl.textContent = String(idx + 1);
-        const pct = ((idx+1) / SLIDES.length) * 100;
-        progressBar.style.width = pct.toFixed(2) + "%";
-      }
+      renderSlides();
 
     })();
   </script>
