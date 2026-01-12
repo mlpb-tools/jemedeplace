@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Aide régionale – Permis B</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+/* ====== BAUHAUS x FACILITATION ====== */
+:root{
+  --blue:#0057FF;
+  --red:#E31B23;
+  --yellow:#FFD400;
+  --black:#0B0B0B;
+  --bg:#F7F7F2;
+}
+
+body{
+  margin:0;
+  font-family: Inter, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--black);
+}
+
+/* Container */
+.infographic{
+  max-width:900px;
+  margin:40px auto;
+  padding:32px;
+  background:white;
+  border:4px solid var(--black);
+}
+
+/* Title */
+h1{
+  text-transform:uppercase;
+  font-size:38px;
+  margin:0 0 8px;
+}
+.subtitle{
+  font-size:18px;
+  margin-bottom:32px;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+}
+
+.block{
+  border:3px solid var(--black);
+  padding:20px;
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+.block:hover{
+  transform:translateY(-4px);
+}
+
+.block.blue{background:var(--blue); color:white;}
+.block.red{background:var(--red); color:white;}
+.block.yellow{background:var(--yellow);}
+.block.white{background:white;}
+
+.block h2{
+  margin:0 0 10px;
+  font-size:22px;
+  text-transform:uppercase;
+}
+.block p{
+  margin:0;
+  font-size:16px;
+}
+
+/* Footer message */
+.footer{
+  margin-top:32px;
+  padding:20px;
+  border:3px solid var(--black);
+  font-weight:600;
+}
+
+/* ===== MODAL ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+.modal.active{display:flex;}
+
+.modal-content{
+  background:white;
+  max-width:520px;
+  padding:28px;
+  border:4px solid var(--black);
+}
+.modal-content h3{
+  margin-top:0;
+  text-transform:uppercase;
+}
+.modal-content ul{
+  padding-left:18px;
+}
+.close{
+  margin-top:20px;
+  display:inline-block;
+  border:3px solid var(--black);
+  padding:8px 14px;
+  cursor:pointer;
+  font-weight:700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="infographic">
+
+  <h1>Aide régionale Nouvelle-Aquitaine</h1>
+  <div class="subtitle">Permis de conduire B</div>
+
+  <div class="grid">
+
+    <!-- À quoi ça sert -->
+    <div class="block blue" onclick="openModal('serve')">
+      <h2>À quoi ça sert ?</h2>
+      <p>Aider à financer le permis<br>quand il est nécessaire</p>
+    </div>
+
+    <!-- Montant -->
+    <div class="block red" onclick="openModal('montant')">
+      <h2>Montant</h2>
+      <p>Jusqu’à<br><strong>1 200 €</strong></p>
+    </div>
+
+    <!-- Pour qui -->
+    <div class="block yellow" onclick="openModal('pourqui')">
+      <h2>Pour qui ?</h2>
+      <p>Quand le permis est<br>indispensable au projet</p>
+    </div>
+
+    <!-- Ce que ça finance -->
+    <div class="block white" onclick="openModal('finance')">
+      <h2>Ce que ça finance</h2>
+      <p>Code · Conduite · Forfait</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    🧭 Le permis est un outil, pas une obligation.<br>
+    On regarde d’abord ta mobilité réelle.
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+const content = {
+  serve: `
+    <h3>À quoi ça sert ?</h3>
+    <p>
+      Cette aide sert à <strong>aider financièrement</strong> les jeunes
+      quand le permis est <strong>nécessaire</strong> pour :
+    </p>
+    <ul>
+      <li>aller travailler</li>
+      <li>suivre une formation</li>
+      <li>sécuriser un projet professionnel</li>
+    </ul>
+  `,
+  montant: `
+    <h3>Montant</h3>
+    <p>
+      👉 Jusqu’à <strong>1 200 € maximum</strong>
+    </p>
+    <p>
+      Le montant dépend de :
+    </p>
+    <ul>
+      <li>ta situation</li>
+      <li>ton projet</li>
+      <li>les règles de la Région</li>
+    </ul>
+    <p><strong>Ce n’est pas automatique.</strong></p>
+  `,
+  pourqui: `
+    <h3>Pour qui ?</h3>
+    <ul>
+      <li>Jeunes accompagnés</li>
+      <li>Permis indispensable au projet</li>
+      <li>Peu ou pas de transports adaptés</li>
+    </ul>
+    <p>
+      👉 Le permis doit avoir un <strong>lien clair</strong> avec ton projet.
+    </p>
+  `,
+  finance: `
+    <h3>Ce que l’aide peut financer</h3>
+    <ul>
+      <li>le code de la route</li>
+      <li>des heures de conduite</li>
+      <li>une partie du forfait auto-école</li>
+    </ul>
+    <p>
+      ⚠️ Auto-école <strong>obligatoirement agréée</strong>
+    </p>
+  `
+};
+
+function openModal(key){
+  document.getElementById('modalContent').innerHTML =
+    content[key] + '<div class="close" onclick="closeModal()">FERMER</div>';
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+}
+</script>
+
+</body>
+</html>
