@@ -1,233 +1,552 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Aide régionale – Permis B</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JE ME DÉPLACE - Mission Locale Pays Basque</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Palette Officielle Mission Locale Pays Basque */
+            --orange: #f39200;  /* Énergie, transition, dynamisme */
+            --green: #95c11f;   /* Collaboration, réussite collective */
+            --blue: #2897d5;    /* Réflexion, innovation */
+            --pink: #d60b52;    /* Lien humain, émotion, engagement */
+            --purple: #a3195b;  /* Sens, appartenance */
+            --red: #9f3d3f;     /* Ancrage, cadre institutionnel */
+            --black: #171718;   /* Contraste, structure */
+            --white: #FFFFFF;   /* Respiration et clarté */
+            
+            --bg-color: var(--white);
+            --border: 3px solid var(--black);
+            --shadow: 6px 6px 0 var(--black);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
-<style>
-/* ====== BAUHAUS x FACILITATION ====== */
-:root{
-  --blue:#0057FF;
-  --red:#E31B23;
-  --yellow:#FFD400;
-  --black:#0B0B0B;
-  --bg:#F7F7F2;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body{
-  margin:0;
-  font-family: Inter, Arial, sans-serif;
-  background:var(--bg);
-  color:var(--black);
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--black);
+            overflow: hidden;
+        }
 
-/* Container */
-.infographic{
-  max-width:900px;
-  margin:40px auto;
-  padding:32px;
-  background:white;
-  border:4px solid var(--black);
-}
+        /* --- NAVIGATION --- */
+        #container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
 
-/* Title */
-h1{
-  text-transform:uppercase;
-  font-size:38px;
-  margin:0 0 8px;
-}
-.subtitle{
-  font-size:18px;
-  margin-bottom:32px;
-}
+        section.slide {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: var(--border);
+            overflow: hidden;
+            background: var(--bg-color);
+        }
 
-/* Grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:24px;
-}
+        .nav-controls {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 100; display: flex; gap: 1rem;
+        }
+        .nav-btn {
+            width: 50px; height: 50px; border: var(--border); background: var(--white);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; box-shadow: 3px 3px 0 var(--black); transition: var(--transition);
+        }
+        .nav-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); background: var(--orange); }
+        .progress { position: fixed; top: 0; left: 0; height: 8px; background: var(--orange); width: 0%; z-index: 200; transition: width 0.3s; }
 
-.block{
-  border:3px solid var(--black);
-  padding:20px;
-  cursor:pointer;
-  transition:transform .15s ease;
-}
-.block:hover{
-  transform:translateY(-4px);
-}
+        /* --- TYPOGRAPHIE & LAYOUT --- */
+        .content-box {
+            max-width: 1200px; width: 100%; z-index: 2; position: relative;
+            display: flex; flex-direction: column; align-items: center;
+        }
 
-.block.blue{background:var(--blue); color:white;}
-.block.red{background:var(--red); color:white;}
-.block.yellow{background:var(--yellow);}
-.block.white{background:white;}
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; text-transform: uppercase; font-weight: 900; margin-bottom: 1rem; text-align: center; color: var(--black); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase; font-weight: 900; margin-bottom: 1.5rem; background: var(--white); display: inline-block; padding: 5px 15px; border: 2px solid transparent;}
+        
+        .badge {
+            background: var(--black); color: var(--white); padding: 0.5rem 1rem;
+            font-weight: 700; text-transform: uppercase; font-size: 1rem;
+            display: inline-block; transform: rotate(-1deg); margin-bottom: 1rem;
+        }
 
-.block h2{
-  margin:0 0 10px;
-  font-size:22px;
-  text-transform:uppercase;
-}
-.block p{
-  margin:0;
-  font-size:16px;
-}
+        p { font-size: 1.1rem; line-height: 1.5; margin-bottom: 1rem; max-width: 900px; text-align: center; }
+        
+        .highlight { padding: 0 5px; font-weight: 800; }
 
-/* Footer message */
-.footer{
-  margin-top:32px;
-  padding:20px;
-  border:3px solid var(--black);
-  font-weight:600;
-}
+        /* --- LOGO --- */
+        .logo-ml {
+            max-height: 80px;
+            margin-bottom: 2rem;
+        }
 
-/* ===== MODAL ===== */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-}
-.modal.active{display:flex;}
+        /* --- GRIDS & CARDS --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; width: 100%; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; width: 100%; }
 
-.modal-content{
-  background:white;
-  max-width:520px;
-  padding:28px;
-  border:4px solid var(--black);
-}
-.modal-content h3{
-  margin-top:0;
-  text-transform:uppercase;
-}
-.modal-content ul{
-  padding-left:18px;
-}
-.close{
-  margin-top:20px;
-  display:inline-block;
-  border:3px solid var(--black);
-  padding:8px 14px;
-  cursor:pointer;
-  font-weight:700;
-}
-</style>
+        .card {
+            background: var(--white); border: var(--border); padding: 1.5rem;
+            transition: var(--transition); position: relative; height: 100%;
+            display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .card.interactive { cursor: pointer; }
+        .card.interactive:hover { background: var(--orange); border-color: var(--black); }
+        
+        .card h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--black); border-bottom: 2px solid var(--orange); padding-bottom: 5px; width: 100%;}
+        .card .icon { font-size: 2rem; margin-bottom: 1rem; color: var(--black); }
+        .card ul { list-style: none; text-align: left; width: 100%; margin-top: 0.5rem; font-size: 0.95rem; }
+        .card ul li { margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
+        .card ul li::before { content: "■"; color: var(--orange); position: absolute; left: 0; font-size: 0.8em; }
+
+        /* --- VISUEL MAP --- */
+        .map-visual { 
+            width: 100%; height: auto; max-height: 50vh; 
+            border: var(--border); box-shadow: var(--shadow); 
+            object-fit: contain; /* Adapté pour afficher l'image entière */
+            background: white;
+            display: block;
+            margin-bottom: 2rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- DECORATION --- */
+        .shape { position: absolute; z-index: 0; pointer-events: none; }
+        .circle { border-radius: 50%; border: var(--border); }
+        .rect { border: var(--border); }
+        
+        /* --- BUTTONS --- */
+        .btn {
+            background: var(--black); color: var(--white); border: var(--border);
+            padding: 1rem 2rem; font-weight: 700; text-transform: uppercase;
+            cursor: pointer; box-shadow: var(--shadow); transition: var(--transition);
+            font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+        }
+        .btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--black); background: var(--orange); color: var(--black); }
+        
+        .btn-outline {
+             background: transparent; color: var(--black); border: var(--border);
+             padding: 0.8rem 1.5rem; font-weight: 700; text-transform: uppercase;
+             cursor: pointer; box-shadow: none; transition: var(--transition);
+             font-size: 0.9rem; display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+        }
+        .btn-outline:hover { background: var(--white); transform: translateY(-2px); }
+
+        /* --- MODALES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(23, 23, 24, 0.95); z-index: 300;
+            display: none; justify-content: center; align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box {
+            background: var(--bg-color); border: var(--border); padding: 3rem;
+            max-width: 700px; width: 90%; position: relative;
+            box-shadow: 15px 15px 0 var(--orange);
+            max-height: 85vh; overflow-y: auto;
+        }
+        .modal-box h2 { font-size: 2rem; border-bottom: 4px solid var(--black); width: 100%; margin-bottom: 1.5rem; color: var(--black); }
+        .modal-content { font-size: 1.1rem; line-height: 1.6; }
+        .close-modal { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 2.5rem; cursor: pointer; transition: transform 0.2s; color: var(--black); }
+        .close-modal:hover { transform: rotate(90deg); color: var(--red); }
+
+        /* --- MEDIA QUERIES --- */
+        @media(max-width: 768px) {
+            h1 { font-size: 2rem; } h2 { font-size: 1.2rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            section.slide { padding: 1rem; }
+            .logo-ml { max-height: 50px; }
+            .map-visual { max-height: 30vh; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="infographic">
+    <div class="progress" id="progressBar"></div>
 
-  <h1>Aide régionale Nouvelle-Aquitaine</h1>
-  <div class="subtitle">Permis de conduire B</div>
-
-  <div class="grid">
-
-    <!-- À quoi ça sert -->
-    <div class="block blue" onclick="openModal('serve')">
-      <h2>À quoi ça sert ?</h2>
-      <p>Aider à financer le permis<br>quand il est nécessaire</p>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="scrollSlide(-1)"><i class="fa-solid fa-arrow-up"></i></button>
+        <button class="nav-btn" onclick="scrollSlide(1)"><i class="fa-solid fa-arrow-down"></i></button>
     </div>
 
-    <!-- Montant -->
-    <div class="block red" onclick="openModal('montant')">
-      <h2>Montant</h2>
-      <p>Jusqu’à<br><strong>1 200 €</strong></p>
+    <div id="container">
+
+        <!-- SLIDE 1 : COUVERTURE -->
+        <section class="slide">
+            <div class="shape circle" style="background: var(--orange); width: 200px; height: 200px; top: 15%; left: 10%;"></div>
+            <div class="shape rect" style="background: var(--blue); width: 150px; height: 300px; bottom: 0; right: 10%;"></div>
+            
+            <div class="content-box">
+                <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo Mission Locale" class="logo-ml">
+                
+                <h1>JE ME DÉPLACE</h1>
+                <p style="font-weight: 600; font-size: 1.3rem; margin-top: 1rem;">La mobilité n'est pas seulement un moyen de se déplacer, c'est une véritable compétence.</p>
+                <p>Elle te permet d'organiser ton quotidien et d'accéder à l'emploi, à la formation, aux soins ou aux loisirs.</p>
+                <br>
+                <button class="btn" style="background: var(--orange); border-color: var(--black); color: var(--black);" onclick="scrollSlide(1)">DÉCOUVRIR LES SOLUTIONS</button>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 : MAP TA MOB (Visuel Image 2 + Lien) -->
+        <section class="slide" style="background: var(--black);">
+            <div class="content-box">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="color: var(--black); margin: 0; font-size: 1.5rem;">ÉTAPE 1 : VISUALISER</h2>
+                    <p style="color: var(--white); margin: 0; font-size: 0.9rem;">Fais ton diagnostic avant d'agir.</p>
+                </div>
+                
+                <!-- VISUEL REMPLACÉ (IMAGE 2) -->
+                <div style="position: relative; width: 100%; display: flex; justify-content: center;">
+                    <img src="2.png" alt="Visuel Map-Ta-Mob (Image 2)" class="map-visual">
+                </div>
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                    <!-- BOUTON LIEN EXTERNE -->
+                    <a href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" class="btn" style="background: var(--green); color: var(--black); border-color: var(--white);">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> OUVRIR L'OUTIL (PLEIN ÉCRAN)
+                    </a>
+                    <!-- BOUTON SUITE -->
+                    <button class="btn-outline" style="color: white; border-color: white;" onclick="scrollSlide(1)">
+                        CONTINUER LA PRÉSENTATION <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3 : CODE DE LA ROUTE -->
+        <section class="slide">
+            <div class="shape circle" style="background: var(--blue); width: 100px; height: 100px; top: 10%; right: 5%; opacity: 0.5;"></div>
+            <div class="content-box">
+                <div class="badge" style="background: var(--blue);">THÉORIE</div>
+                <h2>1. LE CODE DE LA ROUTE</h2>
+                <p>Le socle théorique indispensable avant la pratique.</p>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i> LE NEPH</h3>
+                        <p>Ton identifiant candidat <strong>obligatoire</strong>.</p>
+                        <ul>
+                            <li>À demander sur <strong>ANTS.gouv.fr</strong></li>
+                            <li>Pièce d'identité + Justif domicile + E-photo</li>
+                            <li>Délai : ~2 semaines</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-laptop-code" style="color: var(--blue);"></i> L'EXAMEN</h3>
+                        <p>Inscription via La Poste, Dekra, etc.</p>
+                        <ul>
+                            <li>Coût : <strong>30 €</strong></li>
+                            <li>Objectif : 35/40 min.</li>
+                            <li>Résultats par mail (24h-72h)</li>
+                        </ul>
+                    </div>
+                    <div class="card interactive" onclick="openModal('handicap')">
+                        <h3><i class="fa-solid fa-wheelchair" style="color: var(--purple);"></i> HANDICAP ?</h3>
+                        <p>Des aménagements existent !</p>
+                        <p style="font-size: 0.9rem;">(Temps supplémentaire, interprète...). <br><strong>Clique pour voir comment.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 : PERMIS B (Aides) -->
+        <section class="slide">
+            <div class="content-box">
+                <div class="badge" style="background: var(--red);">PRATIQUE</div>
+                <h2>2. LE PERMIS B</h2>
+                <p>Un investissement lourd que plusieurs aides peuvent alléger.</p>
+                
+                <div class="grid-3">
+                    <div class="card interactive" onclick="openModal('region')">
+                        <h3><i class="fa-solid fa-location-dot" style="color: var(--red);"></i> RÉGION N-AQUITAINE</h3>
+                        <p>De <strong>400€ à 1200€</strong> selon ressources.</p>
+                        <p style="font-size: 0.8rem;">Pour les 17-25 ans en parcours d'insertion.</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('ft')">
+                        <h3><i class="fa-solid fa-briefcase" style="color: var(--blue);"></i> FRANCE TRAVAIL</h3>
+                        <p>Jusqu'à <strong>1200€</strong>.</p>
+                        <p style="font-size: 0.8rem;">Si inscrit > 6 mois et frein à l'embauche.</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('apprenti')">
+                        <h3><i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> AIDE APPRENTIS</h3>
+                        <p>Forfait <strong>500€</strong>.</p>
+                        <p style="font-size: 0.8rem;">Cumulable, dès 18 ans.</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('engage')">
+                        <h3><i class="fa-solid fa-hand-holding-heart" style="color: var(--pink);"></i> JEUNES & ENGAGÉS</h3>
+                        <p>Jusqu'à <strong>500€</strong>.</p>
+                        <p style="font-size: 0.8rem;">Contre mission citoyenne (Service Civique, SNU...).</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('un_euro')">
+                        <h3><i class="fa-solid fa-euro-sign" style="color: var(--orange);"></i> PERMIS 1€ / JOUR</h3>
+                        <p><strong>Prêt à taux zéro.</strong></p>
+                        <p style="font-size: 0.8rem;">Remboursement par mensualités de 30€.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 : FOCUS FAJ -->
+        <section class="slide">
+            <div class="shape rect" style="background: var(--pink); width: 100%; height: 20px; top: 15%;"></div>
+            <div class="content-box">
+                <div class="badge" style="background: var(--pink);">COUP DE POUCE</div>
+                <h2>3. FOCUS : FAJ MOBILITÉS</h2>
+                <p>Le Fonds d’Aide aux Jeunes : un filet de sécurité pour les obstacles financiers immédiats.</p>
+                
+                <div class="grid-2">
+                    <div class="card" style="border-color: var(--pink);">
+                        <h3><i class="fa-solid fa-gas-pump" style="color: var(--pink);"></i> DÉPLACEMENTS</h3>
+                        <ul>
+                            <li>Aide plafonnée à <strong>450€ / an</strong>.</li>
+                            <li>Base de 0,20€ / km.</li>
+                            <li>Pour : Entretien, formation, RDV médical.</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-color: var(--pink);">
+                        <h3><i class="fa-solid fa-wrench" style="color: var(--pink);"></i> RÉPARATIONS</h3>
+                        <ul>
+                            <li>Jusqu'à <strong>500€</strong> pour l'entretien.</li>
+                            <li>Véhicule nécessaire au projet pro.</li>
+                            <li>Reste à charge obligatoire de 10%.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; font-weight: 700; color: var(--pink);">
+                    <i class="fa-solid fa-info-circle"></i> Mobilisable UNIQUEMENT via ton conseiller Mission Locale.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 : AUTRES DISPOSITIFS -->
+        <section class="slide">
+            <div class="content-box">
+                <div class="badge" style="background: var(--green);">ALTERNATIVES</div>
+                <h2>4. ACHAT ET LOCATION</h2>
+                <p>Des solutions quand le système bancaire classique ne peut pas t'aider.</p>
+                
+                <div class="grid-3">
+                    <div class="card interactive" onclick="openModal('microcredit')">
+                        <h3>MICROCRÉDIT ADIE</h3>
+                        <p>Emprunt jusqu'à <strong>6 000€</strong>.</p>
+                        <p style="font-size: 0.8rem;">Pour acheter ou réparer un véhicule.</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('renault')">
+                        <h3>RENAULT CAREMAKERS</h3>
+                        <p>Location (LOA) véhicule neuf.</p>
+                        <p style="font-size: 0.8rem;">À partir de <strong>135€ / mois</strong> pour les personnes en insertion.</p>
+                    </div>
+                    <div class="card interactive" onclick="openModal('norauto')">
+                        <h3>RÉPARATION SOLIDAIRE</h3>
+                        <p>Chez <strong>Norauto</strong> (Manaara).</p>
+                        <p style="font-size: 0.8rem;">Jusqu'à -30% si Quotient Familial < 750€.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7 : ECOMOBILITÉ (ZFE SUPPRIMÉE) -->
+        <section class="slide">
+            <div class="content-box">
+                <div class="badge" style="background: var(--orange);">BOUGER MALIN</div>
+                <h2>5. ÉCOMOBILITÉ</h2>
+                <p>Choisir le mode de transport le plus économe et le plus propre.</p>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> PERMIS AM (BSR)</h3>
+                        <ul>
+                            <li>Dès 14 ans.</li>
+                            <li>8h de formation (sans examen).</li>
+                            <li>Coût : 200€ à 350€.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fa-solid fa-bolt" style="color: var(--orange);"></i> TROTTINETTE</h3>
+                        <ul>
+                            <li>Interdite sur les trottoirs.</li>
+                            <li>Limitée à 25 km/h.</li>
+                            <li>Éclairage et assurance obligatoires.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8 : TXIK TXAK (COVOITURAGE SUPPRIMÉ) -->
+        <section class="slide" style="background: var(--black); color: var(--white);">
+            <div class="shape circle" style="background: var(--red); width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.5;"></div>
+            <div class="content-box">
+                <div class="badge" style="background: var(--white); color: var(--black);">TRANSPORTS EN COMMUN</div>
+                <h2 style="color: var(--black);">6. RÉSEAU TXIK TXAK</h2>
+                <p style="color: #ccc;">Le réseau adapte ses tarifs à tes revenus pour être accessible à tous.</p>
+                
+                <div class="grid-2" style="margin-top: 2rem;">
+                    <div class="card" style="color: var(--black);">
+                        <h3>TARIF SOLIDAIRE</h3>
+                        <p style="color: var(--red); font-weight: 800; font-size: 1.5rem;">-50% à -75%</p>
+                        <p style="font-size: 0.9rem;">Selon ton Quotient Familial (QF).</p>
+                    </div>
+                    <div class="card" style="color: var(--black);">
+                        <h3>DÉMARCHE</h3>
+                        <ul>
+                            <li>Calcule ton QF (Revenu / parts).</li>
+                            <li>Pas à la CAF ? La Mission Locale te fait une attestation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9 : SNCF -->
+        <section class="slide">
+            <div class="content-box">
+                <div class="badge" style="background: var(--blue);">RÉGION</div>
+                <h2>7. CARTE SOLIDAIRE SNCF</h2>
+                <p>Pour faciliter tes déplacements régionaux en train ou en car.</p>
+                
+                <div class="card" style="max-width: 600px; border: 4px solid var(--blue); text-align: center; align-items: center;">
+                    <i class="fa-solid fa-train" style="font-size: 4rem; color: var(--blue); margin-bottom: 1rem;"></i>
+                    <h3 style="border-bottom: none; font-size: 2rem; color: var(--blue);">RÉDUCTION -80%</h3>
+                    <p>Sur tes billets unitaires TER Nouvelle-Aquitaine.</p>
+                    <hr style="width: 50%; margin: 1rem auto; border: 1px solid var(--black);">
+                    <ul style="width: fit-content; margin: 0 auto;">
+                        <li><i class="fa-solid fa-check"></i> Résider en région.</li>
+                        <li><i class="fa-solid fa-check"></i> QF < 960 € (ou AAH, ADA, Réfugié).</li>
+                        <li><i class="fa-solid fa-check"></i> Carte gratuite valable 1 an.</li>
+                    </ul>
+                    <button class="btn" style="margin-top: 1rem; background: var(--blue);">DEMANDER EN LIGNE</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10 : CONCLUSION -->
+        <section class="slide">
+            <div class="shape circle" style="background: var(--orange); width: 200px; height: 200px; opacity: 0.5; top: 20%; left: 20%;"></div>
+            <div class="content-box">
+                <h1>L'AVENIR EST À TA PORTÉE</h1>
+                <div class="card" style="border: 4px solid var(--black); padding: 2rem; max-width: 700px;">
+                    <p style="font-size: 1.2rem; font-weight: 700;">Tu as les infos. Maintenant, on agit.</p>
+                    <p>Ton conseiller Mission Locale est là pour t'aider à choisir les bonnes solutions et monter les dossiers.</p>
+                    <hr style="width: 50%; margin: 1rem auto; border: 1px solid var(--black);">
+                    <img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo Mission Locale" class="logo-ml" style="margin-bottom: 0;">
+                    <p style="font-weight: 700; margin-top: 10px;">Prends rendez-vous dès aujourd'hui !</p>
+                </div>
+            </div>
+        </section>
+
     </div>
 
-    <!-- Pour qui -->
-    <div class="block yellow" onclick="openModal('pourqui')">
-      <h2>Pour qui ?</h2>
-      <p>Quand le permis est<br>indispensable au projet</p>
+    <!-- MODALE CONTENU -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <h2 id="modalTitle">TITRE</h2>
+            <div id="modalContent">Texte...</div>
+        </div>
     </div>
 
-    <!-- Ce que ça finance -->
-    <div class="block white" onclick="openModal('finance')">
-      <h2>Ce que ça finance</h2>
-      <p>Code · Conduite · Forfait</p>
-    </div>
+    <script>
+        // NAVIGATION
+        const container = document.getElementById('container');
+        const progressBar = document.getElementById('progressBar');
 
-  </div>
+        function scrollSlide(direction) {
+            const h = window.innerHeight;
+            container.scrollBy({ top: h * direction, behavior: 'smooth' });
+        }
 
-  <div class="footer">
-    🧭 Le permis est un outil, pas une obligation.<br>
-    On regarde d’abord ta mobilité réelle.
-  </div>
+        container.addEventListener('scroll', () => {
+            const scrollPos = container.scrollTop;
+            const height = container.scrollHeight - container.clientHeight;
+            const scrolled = (scrollPos / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
 
-</div>
+        // DONNÉES DÉTAILLÉES POUR MODALES
+        const modalData = {
+            'handicap': {
+                title: "AMÉNAGEMENTS HANDICAP",
+                text: "<p>Le Bureau d’Éducation Routière (BER) permet des aménagements pour l'examen du code :</p><ul><li>Temps supplémentaire pour répondre.</li><li>Interprète (Langue des Signes...).</li></ul><p>Parles-en à ton auto-école ou ton conseiller dès l'inscription.</p>"
+            },
+            'region': {
+                title: "AIDE RÉGION NOUVELLE-AQUITAINE",
+                text: "<p>Pour les 17-25 ans en parcours d'insertion professionnelle.</p><p><strong>Montant :</strong> De 400€ à 1200€ selon le revenu fiscal par part (< 15 000€).</p><p><strong>Condition :</strong> Avoir un projet pro validé nécessitant le permis.</p>"
+            },
+            'ft': {
+                title: "AIDE FRANCE TRAVAIL",
+                text: "<p>Pour les demandeurs d'emploi inscrits depuis plus de 6 mois.</p><p><strong>Condition :</strong> L'absence de permis doit être un frein constaté à l'embauche (offre d'emploi ou zone mal desservie).</p><p><strong>Montant :</strong> Jusqu'à 1200€ versés à l'auto-école.</p>"
+            },
+            'apprenti': {
+                title: "AIDE AUX APPRENTIS",
+                text: "<p>Aide de l'État pour tout apprenti majeur (18 ans et +).</p><p><strong>Montant :</strong> 500€ forfaitaires.</p><p><strong>Avantage :</strong> Cumulable avec toutes les autres aides. Dossier à demander au CFA.</p>"
+            },
+            'engage': {
+                title: "JEUNES & ENGAGÉS (CD64)",
+                text: "<p>Dispositif du Département des Pyrénées-Atlantiques.</p><p><strong>Montant :</strong> Jusqu'à 500€.</p><p><strong>Condition :</strong> Avoir réalisé une mission citoyenne (Service Civique, SNU, Jeune Sapeur-Pompier...).</p>"
+            },
+            'un_euro': {
+                title: "PERMIS À 1€ / JOUR",
+                text: "<p>Ce n'est pas un permis à 1€ ! C'est un <strong>prêt bancaire à taux zéro</strong>.</p><p>L'État paie les intérêts. Tu rembourses environ 30€ par mois (soit 1€ par jour) une fois le permis obtenu ou la formation commencée.</p>"
+            },
+            'microcredit': {
+                title: "MICROCRÉDIT ADIE",
+                text: "<p>Pour ceux exclus du système bancaire classique.</p><p><strong>Montant :</strong> Jusqu'à 6000€ (8000€ microcrédit personnel).</p><p><strong>Usage :</strong> Achat de véhicule ou réparations coûteuses.</p>"
+            },
+            'renault': {
+                title: "RENAULT CAREMAKERS",
+                text: "<p>Programme solidaire de Renault.</p><p><strong>Offre :</strong> Location avec Option d'Achat (LOA) sur véhicule neuf.</p><p><strong>Prix :</strong> À partir de 135€/mois (sous conditions de revenus et d'insertion).</p>"
+            },
+            'norauto': {
+                title: "RÉPARATION SOLIDAIRE (NORAUTO)",
+                text: "<p>Programme Manaara.</p><p><strong>Avantage :</strong> Jusqu'à 30% de réduction sur la facture.</p><p><strong>Condition :</strong> Avoir un Quotient Familial (QF) inférieur à 750€.</p>"
+            }
+        };
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content" id="modalContent"></div>
-</div>
+        // GESTION MODALES
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
 
-<script>
-const content = {
-  serve: `
-    <h3>À quoi ça sert ?</h3>
-    <p>
-      Cette aide sert à <strong>aider financièrement</strong> les jeunes
-      quand le permis est <strong>nécessaire</strong> pour :
-    </p>
-    <ul>
-      <li>aller travailler</li>
-      <li>suivre une formation</li>
-      <li>sécuriser un projet professionnel</li>
-    </ul>
-  `,
-  montant: `
-    <h3>Montant</h3>
-    <p>
-      👉 Jusqu’à <strong>1 200 € maximum</strong>
-    </p>
-    <p>
-      Le montant dépend de :
-    </p>
-    <ul>
-      <li>ta situation</li>
-      <li>ton projet</li>
-      <li>les règles de la Région</li>
-    </ul>
-    <p><strong>Ce n’est pas automatique.</strong></p>
-  `,
-  pourqui: `
-    <h3>Pour qui ?</h3>
-    <ul>
-      <li>Jeunes accompagnés</li>
-      <li>Permis indispensable au projet</li>
-      <li>Peu ou pas de transports adaptés</li>
-    </ul>
-    <p>
-      👉 Le permis doit avoir un <strong>lien clair</strong> avec ton projet.
-    </p>
-  `,
-  finance: `
-    <h3>Ce que l’aide peut financer</h3>
-    <ul>
-      <li>le code de la route</li>
-      <li>des heures de conduite</li>
-      <li>une partie du forfait auto-école</li>
-    </ul>
-    <p>
-      ⚠️ Auto-école <strong>obligatoirement agréée</strong>
-    </p>
-  `
-};
+        function openModal(key) {
+            if(modalData[key]) {
+                modalTitle.innerText = modalData[key].title;
+                modalContent.innerHTML = modalData[key].text;
+                modalOverlay.classList.add('active');
+            }
+        }
 
-function openModal(key){
-  document.getElementById('modalContent').innerHTML =
-    content[key] + '<div class="close" onclick="closeModal()">FERMER</div>';
-  document.getElementById('modal').classList.add('active');
-}
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
 
-function closeModal(){
-  document.getElementById('modal').classList.remove('active');
-}
-</script>
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
 
+        // CLAVIER
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowDown") scrollSlide(1);
+            if (e.key === "ArrowUp") scrollSlide(-1);
+            if (e.key === "Escape") closeModal();
+        });
+    </script>
 </body>
 </html>
