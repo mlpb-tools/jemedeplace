@@ -11,7 +11,7 @@
     
     <style>
         :root {
-            /* Palette Officielle Mission Locale Pays Basque */
+            /* Palette Officielle Mission Locale Pays Basque - STRICTE */
             --orange: #f39200;  /* Énergie, transition, dynamisme */
             --green: #95c11f;   /* Collaboration, réussite collective */
             --blue: #2897d5;    /* Réflexion, innovation */
@@ -230,17 +230,28 @@
             </div>
         </section>
 
-        <!-- SLIDE 3 : CODE DE LA ROUTE -->
+        <!-- SLIDE 3 : CODE DE LA ROUTE (CLIQUABLE -> 1.png) -->
         <section class="slide">
             <div class="shape circle" style="background: var(--blue); width: 100px; height: 100px; top: 10%; right: 5%; opacity: 0.5;"></div>
             <div class="content-box">
                 <div class="badge" style="background: var(--blue);">THÉORIE</div>
-                <h2>1. LE CODE DE LA ROUTE</h2>
+                
+                <h2>
+                    <a href="1.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--blue); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        1. LE CODE DE LA ROUTE 
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--blue);"></i>
+                    </a>
+                </h2>
+                
                 <p>Le socle théorique indispensable avant la pratique.</p>
                 
                 <div class="grid-3">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i> LE NEPH</h3>
+                    <!-- BLOC LE NEPH INTERACTIF (OUVRE 1.PNG) -->
+                    <div class="card interactive" onclick="window.open('1.png', '_blank')">
+                        <h3>
+                            <i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i> LE NEPH
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.6em; margin-left: 5px; color: var(--black);"></i>
+                        </h3>
                         <p>Ton identifiant candidat <strong>obligatoire</strong>.</p>
                         <ul>
                             <li>À demander sur <strong>ANTS.gouv.fr</strong></li>
@@ -248,6 +259,7 @@
                             <li>Délai : ~2 semaines</li>
                         </ul>
                     </div>
+
                     <div class="card">
                         <h3><i class="fa-solid fa-laptop-code" style="color: var(--blue);"></i> L'EXAMEN</h3>
                         <p>Inscription via La Poste, Dekra, etc.</p>
@@ -266,11 +278,18 @@
             </div>
         </section>
 
-        <!-- SLIDE 4 : PERMIS B (Aides) -->
+        <!-- SLIDE 4 : PERMIS B (CLIQUABLE -> 2.png) + AIDE APPRENTI (CLIQUABLE -> 4.png) -->
         <section class="slide">
             <div class="content-box">
                 <div class="badge" style="background: var(--red);">PRATIQUE</div>
-                <h2>2. LE PERMIS B</h2>
+                
+                <h2>
+                    <a href="2.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--red); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        2. LE PERMIS B
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--red);"></i>
+                    </a>
+                </h2>
+
                 <p>Un investissement lourd que plusieurs aides peuvent alléger.</p>
                 
                 <div class="grid-3">
@@ -284,11 +303,17 @@
                         <p>Jusqu'à <strong>1200€</strong>.</p>
                         <p style="font-size: 0.8rem;">Si inscrit > 6 mois et frein à l'embauche.</p>
                     </div>
-                    <div class="card interactive" onclick="openModal('apprenti')">
-                        <h3><i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> AIDE APPRENTIS</h3>
+                    
+                    <!-- BLOC AIDE APPRENTIS INTERACTIF (OUVRE 4.PNG) -->
+                    <div class="card interactive" onclick="window.open('4.png', '_blank')">
+                        <h3>
+                            <i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> AIDE APPRENTIS
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.6em; margin-left: 5px; color: var(--black);"></i>
+                        </h3>
                         <p>Forfait <strong>500€</strong>.</p>
                         <p style="font-size: 0.8rem;">Cumulable, dès 18 ans.</p>
                     </div>
+
                     <div class="card interactive" onclick="openModal('engage')">
                         <h3><i class="fa-solid fa-hand-holding-heart" style="color: var(--pink);"></i> JEUNES & ENGAGÉS</h3>
                         <p>Jusqu'à <strong>500€</strong>.</p>
@@ -303,12 +328,19 @@
             </div>
         </section>
 
-        <!-- SLIDE 5 : FOCUS FAJ -->
+        <!-- SLIDE 5 : FOCUS FAJ (CLIQUABLE -> 3.png) -->
         <section class="slide">
             <div class="shape rect" style="background: var(--pink); width: 100%; height: 20px; top: 15%;"></div>
             <div class="content-box">
                 <div class="badge" style="background: var(--pink);">COUP DE POUCE</div>
-                <h2>3. FOCUS : FAJ MOBILITÉS</h2>
+                
+                <h2>
+                    <a href="3.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--pink); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        3. FOCUS : FAJ MOBILITÉS
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--pink);"></i>
+                    </a>
+                </h2>
+                
                 <p>Le Fonds d’Aide aux Jeunes : un filet de sécurité pour les obstacles financiers immédiats.</p>
                 
                 <div class="grid-2">
@@ -335,11 +367,18 @@
             </div>
         </section>
 
-        <!-- SLIDE 6 : AUTRES DISPOSITIFS -->
+        <!-- SLIDE 6 : ACHAT ET LOCATION (CLIQUABLE -> 7.png) -->
         <section class="slide">
             <div class="content-box">
                 <div class="badge" style="background: var(--green);">ALTERNATIVES</div>
-                <h2>4. ACHAT ET LOCATION</h2>
+
+                <h2>
+                    <a href="7.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--green); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        4. ACHAT ET LOCATION
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--green);"></i>
+                    </a>
+                </h2>
+
                 <p>Des solutions quand le système bancaire classique ne peut pas t'aider.</p>
                 
                 <div class="grid-3">
@@ -362,22 +401,35 @@
             </div>
         </section>
 
-        <!-- SLIDE 7 : ECOMOBILITÉ (ZFE SUPPRIMÉE) -->
+        <!-- SLIDE 7 : ECOMOBILITÉ (TITRE -> 5.png, PERMIS AM -> 5.png) -->
         <section class="slide">
             <div class="content-box">
                 <div class="badge" style="background: var(--orange);">BOUGER MALIN</div>
-                <h2>5. ÉCOMOBILITÉ</h2>
+                
+                <h2>
+                    <a href="5.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--orange); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        5. TC ET SCOOTER
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--orange);"></i>
+                    </a>
+                </h2>
+
                 <p>Choisir le mode de transport le plus économe et le plus propre.</p>
                 
                 <div class="grid-2">
-                    <div class="card">
-                        <h3><i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> PERMIS AM (BSR)</h3>
+                    
+                    <!-- BLOC PERMIS AM INTERACTIF (OUVRE 5.PNG) -->
+                    <div class="card interactive" onclick="window.open('5.png', '_blank')">
+                        <h3>
+                            <i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> PERMIS AM (BSR)
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.6em; margin-left: 5px; color: var(--black);"></i>
+                        </h3>
                         <ul>
                             <li>Dès 14 ans.</li>
                             <li>8h de formation (sans examen).</li>
                             <li>Coût : 200€ à 350€.</li>
                         </ul>
                     </div>
+
                     <div class="card">
                         <h3><i class="fa-solid fa-bolt" style="color: var(--orange);"></i> TROTTINETTE</h3>
                         <ul>
@@ -390,13 +442,21 @@
             </div>
         </section>
 
-        <!-- SLIDE 8 : TXIK TXAK (COVOITURAGE SUPPRIMÉ) -->
+        <!-- SLIDE 8 : TXIK TXAK (CLIQUABLE -> 6.png) -->
         <section class="slide" style="background: var(--black); color: var(--white);">
             <div class="shape circle" style="background: var(--red); width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.5;"></div>
             <div class="content-box">
                 <div class="badge" style="background: var(--white); color: var(--black);">TRANSPORTS EN COMMUN</div>
-                <h2 style="color: var(--black);">6. RÉSEAU TXIK TXAK</h2>
-                <p style="color: #ccc;">Le réseau adapte ses tarifs à tes revenus pour être accessible à tous.</p>
+
+                <h2>
+                    <a href="6.png" target="_blank" style="color: var(--black); text-decoration: none; border-bottom: 4px solid var(--red); display: inline-flex; align-items: center; gap: 10px; transition: color 0.3s;" title="Voir l'infographie">
+                        6. RÉSEAU TXIK TXAK
+                        <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--red);"></i>
+                    </a>
+                </h2>
+
+                <!-- Couleur de texte ajustée pour être STRICTEMENT blanche avec opacité -->
+                <p style="color: var(--white); opacity: 0.8;">Le réseau adapte ses tarifs à tes revenus pour être accessible à tous.</p>
                 
                 <div class="grid-2" style="margin-top: 2rem;">
                     <div class="card" style="color: var(--black);">
@@ -504,7 +564,7 @@
             },
             'un_euro': {
                 title: "PERMIS À 1€ / JOUR",
-                text: "<p>Ce n'est pas un permis à 1€ ! C'est un <strong>prêt bancaire à taux zéro</strong>.</p><p>L'État paie les intérêts. Tu rembourses environ 30€ par mois (soit 1€ par jour) une fois le permis obtenu ou la formation commencée.</p>"
+                text: "<p>Ce n'est pas un permis à 1€ ! C'est un <strong>prêt bancaire à taux zéro.</strong></p><p>L'État paie les intérêts. Tu rembourses environ 30€ par mois (soit 1€ par jour) une fois le permis obtenu ou la formation commencée.</p>"
             },
             'microcredit': {
                 title: "MICROCRÉDIT ADIE",
