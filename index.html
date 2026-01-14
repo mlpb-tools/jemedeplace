@@ -11,318 +11,359 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root {
-      /* Palette Officielle Mission Locale Pays Basque */
-      --orange: #f39200;
-      --green: #95c11f;
-      --blue: #2897d5;
-      --pink: #d60b52;
-      --purple: #a3195b;
-      --red: #9f3d3f;
-      --black: #171718;
-      --white: #FFFFFF;
+    :root{
+      /* Palette Officielle Mission Locale Pays Basque - STRICTE */
+      --orange:#f39200;
+      --green:#95c11f;
+      --blue:#2897d5;
+      --pink:#d60b52;
+      --purple:#a3195b;
+      --red:#9f3d3f;
+      --black:#171718;
+      --white:#ffffff;
 
-      --bg-color: var(--white);
-      --border: 3px solid var(--black);
-      --shadow: 6px 6px 0 var(--black);
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--black);
-      overflow: hidden;
+      --bg-color:var(--white);
+      --border:3px solid var(--black);
+      --shadow:6px 6px 0 var(--black);
+      --transition:all .25s cubic-bezier(.25,.8,.25,1);
     }
 
-    /* --- NAVIGATION --- */
-    #container {
-      height: 100vh;
-      width: 100vw;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-color);
+      color:var(--black);
+      overflow:hidden;
     }
 
-    section.slide {
-      height: 100vh;
-      width: 100%;
-      scroll-snap-align: start;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      border-bottom: var(--border);
-      overflow: hidden;
-      background: var(--bg-color);
+    /* Scroll slides */
+    #container{
+      height:100vh;width:100vw;
+      overflow-y:scroll;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
+    }
+    section.slide{
+      height:100vh;width:100%;
+      scroll-snap-align:start;
+      position:relative;
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      padding:2rem;
+      border-bottom:var(--border);
+      overflow:hidden;
+      background:var(--bg-color);
     }
 
-    .nav-controls {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 100;
-      display: flex;
-      gap: 1rem;
+    /* Nav */
+    .nav-controls{
+      position:fixed;bottom:2rem;right:2rem;z-index:120;
+      display:flex;gap:1rem;
     }
-    .nav-btn {
-      width: 50px;
-      height: 50px;
-      border: var(--border);
-      background: var(--white);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 3px 3px 0 var(--black);
-      transition: var(--transition);
+    .nav-btn{
+      width:50px;height:50px;
+      border:var(--border);
+      background:var(--white);
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.2rem;
+      box-shadow:3px 3px 0 var(--black);
+      transition:var(--transition);
     }
-    .nav-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 5px 5px 0 var(--black);
-      background: var(--orange);
+    .nav-btn:hover{
+      transform:translate(-2px,-2px);
+      box-shadow:5px 5px 0 var(--black);
+      background:var(--orange);
     }
-    .progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 8px;
-      background: var(--orange);
-      width: 0%;
-      z-index: 200;
-      transition: width 0.3s;
+    .progress{
+      position:fixed;top:0;left:0;height:8px;
+      background:var(--orange);width:0%;
+      z-index:200;transition:width .2s;
     }
 
-    /* --- TYPOGRAPHIE & LAYOUT --- */
-    .content-box {
-      max-width: 1200px;
-      width: 100%;
-      z-index: 2;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    /* Layout */
+    .content-box{
+      max-width:1200px;width:100%;
+      z-index:2;position:relative;
+      display:flex;flex-direction:column;
+      align-items:center;
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      line-height: 1;
-      text-transform: uppercase;
-      font-weight: 900;
-      margin-bottom: 1rem;
-      text-align: center;
-      color: var(--black);
+    h1{
+      font-size:clamp(2.5rem,5vw,4.5rem);
+      line-height:1;text-transform:uppercase;
+      font-weight:900;margin-bottom:1rem;
+      text-align:center;color:var(--black);
     }
-    h2 {
-      font-size: clamp(1.5rem, 3vw, 2.5rem);
-      text-transform: uppercase;
-      font-weight: 900;
-      margin-bottom: 1.5rem;
-      background: var(--white);
-      display: inline-block;
-      padding: 5px 15px;
-      border: 2px solid transparent;
+    h2{
+      font-size:clamp(1.5rem,3vw,2.5rem);
+      text-transform:uppercase;
+      font-weight:900;margin-bottom:1.25rem;
+      background:var(--white);
+      display:inline-block;
+      padding:6px 14px;
+      border:2px solid transparent;
     }
-
-    .badge {
-      background: var(--black);
-      color: var(--white);
-      padding: 0.5rem 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 1rem;
-      display: inline-block;
-      transform: rotate(-1deg);
-      margin-bottom: 1rem;
+    p{
+      font-size:1.1rem;line-height:1.5;
+      margin-bottom:1rem;
+      max-width:900px;text-align:center;
     }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      max-width: 900px;
-      text-align: center;
+    .badge{
+      background:var(--black);color:var(--white);
+      padding:.5rem 1rem;
+      font-weight:700;text-transform:uppercase;
+      font-size:1rem;display:inline-block;
+      transform:rotate(-1deg);
+      margin-bottom:1rem;
     }
 
-    /* --- LOGO --- */
-    .logo-ml { max-height: 80px; margin-bottom: 2rem; }
+    .logo-ml{max-height:80px;margin-bottom:2rem}
 
-    /* --- GRIDS & CARDS --- */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; width: 100%; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; width: 100%; }
+    /* Grids & cards */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;width:100%}
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;width:100%}
 
-    .card {
-      background: var(--white);
-      border: var(--border);
-      padding: 1.5rem;
-      transition: var(--transition);
-      position: relative;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+    .card{
+      background:var(--white);
+      border:var(--border);
+      padding:1.5rem;
+      transition:var(--transition);
+      position:relative;height:100%;
+      display:flex;flex-direction:column;
+      align-items:flex-start;
+      text-align:left;
     }
-    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-    .card.interactive { cursor: pointer; }
-    .card.interactive:hover { background: var(--orange); border-color: var(--black); }
-
-    .card h3 {
-      font-size: 1.2rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      color: var(--black);
-      border-bottom: 2px solid var(--orange);
-      padding-bottom: 5px;
-      width: 100%;
+    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+    .card.interactive{cursor:pointer}
+    .card.interactive:hover{background:var(--orange);border-color:var(--black)}
+    .card h3{
+      font-size:1.2rem;font-weight:900;
+      margin-bottom:.5rem;text-transform:uppercase;
+      color:var(--black);
+      border-bottom:2px solid var(--orange);
+      padding-bottom:5px;width:100%;
+      display:flex;align-items:center;gap:.6rem;
     }
-    .card ul { list-style: none; text-align: left; width: 100%; margin-top: 0.5rem; font-size: 0.95rem; }
-    .card ul li { margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
-    .card ul li::before { content: "■"; color: var(--orange); position: absolute; left: 0; font-size: 0.8em; }
+    .card ul{list-style:none;text-align:left;width:100%;margin-top:.5rem;font-size:.95rem}
+    .card ul li{margin-bottom:.5rem;padding-left:1rem;position:relative}
+    .card ul li::before{content:"■";color:var(--orange);position:absolute;left:0;font-size:.8em}
 
-    /* --- VISUELS --- */
-    .map-visual {
-      width: 100%;
-      height: auto;
-      max-height: 62vh;
-      border: var(--border);
-      box-shadow: var(--shadow);
-      object-fit: contain;
-      background: white;
-      display: block;
-      margin-bottom: 2rem;
+    /* Images */
+    .map-visual{
+      width:100%;
+      height:auto;
+      max-height:58vh;
+      border:var(--border);
+      box-shadow:var(--shadow);
+      object-fit:contain;
+      background:white;
+      display:block;
+      margin-bottom:1.25rem;
+      cursor:pointer;
     }
 
-    .full-visual {
-      width: 100%;
-      height: auto;
-      max-height: 70vh;
-      border: var(--border);
-      box-shadow: var(--shadow);
-      object-fit: contain;
-      background: white;
+    /* Shapes */
+    .shape{position:absolute;z-index:0;pointer-events:none}
+    .circle{border-radius:50%;border:var(--border)}
+    .rect{border:var(--border)}
+
+    /* Buttons */
+    .btn{
+      background:var(--black);color:var(--white);
+      border:var(--border);
+      padding:1rem 2rem;
+      font-weight:700;text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+      font-size:1rem;
+      display:inline-flex;align-items:center;gap:10px;
+      text-decoration:none;
+    }
+    .btn:hover{
+      transform:translate(-2px,-2px);
+      box-shadow:8px 8px 0 var(--black);
+      background:var(--orange);
+      color:var(--black);
+    }
+    .btn-outline{
+      background:transparent;color:var(--black);
+      border:var(--border);
+      padding:.8rem 1.5rem;
+      font-weight:700;text-transform:uppercase;
+      cursor:pointer;
+      transition:var(--transition);
+      font-size:.9rem;
+      display:inline-flex;align-items:center;gap:6px;
+      text-decoration:none;
+    }
+    .btn-outline:hover{background:var(--white);transform:translateY(-2px)}
+
+    /* Modal (text) */
+    .modal-overlay{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(23,23,24,.95);
+      z-index:300;
+      display:none;justify-content:center;align-items:center;
+    }
+    .modal-overlay.active{display:flex}
+    .modal-box{
+      background:var(--bg-color);
+      border:var(--border);
+      padding:2.2rem;
+      max-width:860px;width:92%;
+      position:relative;
+      box-shadow:15px 15px 0 var(--orange);
+      max-height:88vh;overflow:auto;
+    }
+    .modal-box h2{
+      font-size:1.8rem;
+      border-bottom:4px solid var(--black);
+      width:100%;margin-bottom:1rem;color:var(--black);
+    }
+    .modal-content{font-size:1.05rem;line-height:1.6}
+    .close-modal{
+      position:absolute;top:.75rem;right:.9rem;
+      background:none;border:none;
+      font-size:2.5rem;cursor:pointer;
+      transition:transform .2s;color:var(--black);
+    }
+    .close-modal:hover{transform:rotate(90deg);color:var(--red)}
+
+    /* Image lightbox */
+    .img-overlay{
+      position:fixed;inset:0;
+      background:rgba(23,23,24,.96);
+      z-index:500;
+      display:none;
+      align-items:center;justify-content:center;
+      padding:1.5rem;
+    }
+    .img-overlay.active{display:flex}
+    .img-shell{
+      width:min(1200px,96vw);
+      height:min(88vh,900px);
+      background:var(--white);
+      border:var(--border);
+      box-shadow:15px 15px 0 var(--orange);
+      position:relative;
+      display:flex;flex-direction:column;
+      overflow:hidden;
+    }
+    .img-topbar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.8rem 1rem;
+      border-bottom:var(--border);
+      background:var(--white);
+      gap:1rem;
+    }
+    .img-title{
+      font-weight:900;text-transform:uppercase;
+      font-size:1rem;
+    }
+    .img-actions{display:flex;align-items:center;gap:.5rem}
+    .img-iconbtn{
+      width:44px;height:44px;
+      border:var(--border);
+      background:var(--white);
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:3px 3px 0 var(--black);
+      transition:var(--transition);
+      font-size:1.05rem;
+    }
+    .img-iconbtn:hover{
+      transform:translate(-2px,-2px);
+      box-shadow:5px 5px 0 var(--black);
+      background:var(--orange);
+    }
+    .img-stage{
+      flex:1;
+      background:#fff;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .img-stage img{
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      transform-origin:center center;
+      transition:transform .12s ease-out;
     }
 
-    /* --- DECORATION --- */
-    .shape { position: absolute; z-index: 0; pointer-events: none; }
-    .circle { border-radius: 50%; border: var(--border); }
-    .rect { border: var(--border); }
+    /* Ikigai editable overlay */
+    .ikigai-wrap{
+      width:100%;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1.5rem;
+      align-items:start;
+    }
+    .ikigai-canvas{
+      position:relative;
+      width:100%;
+      border:var(--border);
+      box-shadow:var(--shadow);
+      background:#fff;
+      overflow:hidden;
+    }
+    .ikigai-canvas img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+    }
+    .ikigai-field{
+      position:absolute;
+      border:2px dashed rgba(23,23,24,.35);
+      background:rgba(255,255,255,.85);
+      padding:.55rem;
+      border-radius:10px;
+    }
+    .ikigai-field textarea{
+      width:100%;
+      height:100%;
+      border:none;
+      background:transparent;
+      resize:none;
+      outline:none;
+      font-family:'Inter',sans-serif;
+      font-size:14px;
+      line-height:1.3;
+      color:var(--black);
+    }
+    .mini-help{
+      border:var(--border);
+      padding:1.2rem;
+      background:var(--white);
+      box-shadow:var(--shadow);
+      width:100%;
+    }
+    .mini-help h3{
+      font-size:1.05rem;
+      font-weight:900;
+      text-transform:uppercase;
+      border-bottom:2px solid var(--orange);
+      padding-bottom:.45rem;
+      margin-bottom:.8rem;
+    }
+    .mini-help ul{list-style:none}
+    .mini-help li{margin:.45rem 0;position:relative;padding-left:1rem}
+    .mini-help li::before{content:"■";color:var(--orange);position:absolute;left:0;font-size:.8em}
 
-    /* --- BUTTONS --- */
-    .btn {
-      background: var(--black);
-      color: var(--white);
-      border: var(--border);
-      padding: 1rem 2rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
+    @media(max-width:900px){
+      .ikigai-wrap{grid-template-columns:1fr}
     }
-    .btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 8px 8px 0 var(--black);
-      background: var(--orange);
-      color: var(--black);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--black);
-      border: var(--border);
-      padding: 0.8rem 1.5rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: none;
-      transition: var(--transition);
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      text-decoration: none;
-    }
-    .btn-outline:hover { background: var(--white); transform: translateY(-2px); }
-
-    /* --- MODALES (Texte & Images) --- */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(23, 23, 24, 0.95);
-      z-index: 300;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-    .modal-overlay.active { display: flex; }
-
-    .modal-box {
-      background: var(--bg-color);
-      border: var(--border);
-      padding: 2rem;
-      max-width: 1100px;
-      width: 95%;
-      position: relative;
-      box-shadow: 15px 15px 0 var(--orange);
-      max-height: 88vh;
-      overflow: auto;
-    }
-
-    .modal-box h2 {
-      font-size: 1.6rem;
-      border-bottom: 4px solid var(--black);
-      width: 100%;
-      margin-bottom: 1rem;
-      color: var(--black);
-    }
-
-    .modal-content { font-size: 1.05rem; line-height: 1.6; }
-    .modal-image {
-      width: 100%;
-      height: auto;
-      max-height: 72vh;
-      object-fit: contain;
-      border: var(--border);
-      box-shadow: 6px 6px 0 var(--black);
-      background: #fff;
-    }
-    .modal-caption {
-      margin-top: 0.75rem;
-      font-size: 0.95rem;
-      opacity: 0.85;
-    }
-
-    .close-modal {
-      position: absolute; top: 0.8rem; right: 0.9rem;
-      background: none; border: none; font-size: 2.2rem;
-      cursor: pointer; transition: transform 0.2s; color: var(--black);
-      line-height: 1;
-    }
-    .close-modal:hover { transform: rotate(90deg); color: var(--red); }
-
-    /* --- MEDIA QUERIES --- */
-    @media(max-width: 768px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.2rem; }
-      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      section.slide { padding: 1rem; }
-      .logo-ml { max-height: 50px; }
-      .map-visual { max-height: 40vh; }
-      .modal-overlay { padding: 1rem; }
-      .modal-box { padding: 1.25rem; }
+    @media(max-width:768px){
+      h1{font-size:2rem}
+      h2{font-size:1.2rem}
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      section.slide{padding:1rem}
+      .logo-ml{max-height:50px}
+      .map-visual{max-height:40vh}
+      .img-shell{height:min(86vh,780px)}
     }
   </style>
 </head>
@@ -331,8 +372,8 @@
   <div class="progress" id="progressBar"></div>
 
   <div class="nav-controls">
-    <button class="nav-btn" onclick="scrollSlide(-1)"><i class="fa-solid fa-arrow-up"></i></button>
-    <button class="nav-btn" onclick="scrollSlide(1)"><i class="fa-solid fa-arrow-down"></i></button>
+    <button class="nav-btn" type="button" onclick="scrollSlide(-1)"><i class="fa-solid fa-arrow-up"></i></button>
+    <button class="nav-btn" type="button" onclick="scrollSlide(1)"><i class="fa-solid fa-arrow-down"></i></button>
   </div>
 
   <div id="container">
@@ -350,35 +391,37 @@
         >
 
         <h1>JE ME DÉPLACE</h1>
-        <p style="font-weight: 600; font-size: 1.3rem; margin-top: 1rem;">
-          La mobilité n'est pas seulement un moyen de se déplacer, c'est une compétence.
-        </p>
-        <p>Elle te permet d'accéder à l'emploi, à la formation, aux soins, aux démarches et aux loisirs.</p>
-
+        <p style="font-weight: 600; font-size: 1.3rem; margin-top: 1rem;">La mobilité n'est pas seulement un moyen de se déplacer, c'est une véritable compétence.</p>
+        <p>Elle te permet d'organiser ton quotidien et d'accéder à l'emploi, à la formation, aux soins ou aux loisirs.</p>
         <br>
-        <button class="btn" style="background: var(--orange); border-color: var(--black); color: var(--black);" onclick="scrollSlide(1)">
-          DÉCOUVRIR
+        <button class="btn" type="button" style="background: var(--orange); border-color: var(--black); color: var(--black);" onclick="scrollSlide(1)">
+          DÉCOUVRIR LES SOLUTIONS
         </button>
       </div>
     </section>
 
-    <!-- SLIDE 2 : VISUALISER (2.png affichée en grand directement) -->
+    <!-- SLIDE 2 : VISUALISER (2.png affichée en grand + clic => lightbox) -->
     <section class="slide" style="background: var(--black);">
       <div class="content-box">
-        <div style="display:flex; justify-content:space-between; width:100%; align-items:center; margin-bottom:1rem; gap: 1rem; flex-wrap: wrap;">
-          <h2 style="color: var(--black); margin:0; font-size:1.5rem;">ÉTAPE 1 : VISUALISER</h2>
-          <p style="color: var(--white); margin:0; font-size:0.95rem; opacity:0.9;">
-            Ta carte = ta réalité. On part du concret.
-          </p>
+        <div style="display:flex; justify-content:space-between; width:100%; align-items:center; margin-bottom: 1rem; gap:1rem; flex-wrap:wrap;">
+          <h2 style="color: var(--black); margin: 0; font-size: 1.5rem;">ÉTAPE 1 : VISUALISER</h2>
+          <p style="color: var(--white); margin: 0; font-size: 0.95rem; opacity:.9;">Fais ton diagnostic avant d'agir.</p>
         </div>
 
-        <img src="2.png" alt="Map-Ta-Mob - Visualiser (2.png)" class="map-visual" onclick="openImage('2.png','Visualiser : ta carte en grand')" style="cursor: zoom-in;">
+        <img
+          src="2.png"
+          alt="Map-Ta-Mob — visualiser (2.png)"
+          class="map-visual js-img"
+          data-img="2.png"
+          data-title="MAP-TA-MOB — VISUALISER"
+        >
 
-        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-          <a href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" class="btn" style="background: var(--green); color: var(--black); border-color: var(--white);">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> OUVRIR MAP-TA-MOB (PLEIN ÉCRAN)
+        <div style="display:flex; gap: 20px; flex-wrap:wrap; justify-content:center;">
+          <a href="https://mlpb-tools.github.io/Map-Ta-Mob/" target="_blank" rel="noopener" class="btn" style="background: var(--green); color: var(--black); border-color: var(--white);">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> OUVRIR L'OUTIL (PLEIN ÉCRAN)
           </a>
-          <button class="btn-outline" style="color:white; border-color:white;" onclick="scrollSlide(1)">
+
+          <button class="btn-outline" type="button" style="color:white; border-color:white;" onclick="scrollSlide(1)">
             CONTINUER <i class="fa-solid fa-arrow-down"></i>
           </button>
         </div>
@@ -387,283 +430,312 @@
 
     <!-- SLIDE 3 : IKIGAI MAPTAMOB (affiché directement) -->
     <section class="slide">
-      <div class="shape circle" style="background: var(--green); width: 160px; height: 160px; top: 10%; left: 6%; opacity: 0.35;"></div>
+      <div class="shape circle" style="background: var(--green); width: 120px; height: 120px; top: 10%; left: 6%; opacity: 0.5;"></div>
       <div class="content-box">
-        <div class="badge" style="background: var(--green); color: var(--black);">DIAGNOSTIC</div>
-        <h2 style="border-bottom: 4px solid var(--green);">MA MOBILITÉ EN 4 FREINS</h2>
-        <p style="max-width: 950px;">
-          Horaires / Coût / Fatigue / Dépendance → on repère ce qui te bloque vraiment.
-        </p>
+        <div class="badge" style="background: var(--green); color: var(--black);">ÉTAPE 2 : COMPRENDRE</div>
 
-        <img src="ikigai-maptamob.png" alt="Ikigai MapTaMob" class="full-visual" onclick="openImage('ikigai-maptamob.png','Ikigai : repérer les 4 freins')" style="cursor: zoom-in;">
-        <div style="margin-top: 1rem; font-weight: 700;">
-          <i class="fa-solid fa-check" style="color: var(--green);"></i>
-          Résultat : une carte + un diagnostic utilisable avec ton conseiller
+        <h2 style="border-left: 10px solid var(--green); padding-left: 10px;">
+          TON IKIGAI MOBILITÉ (EXEMPLE)
+        </h2>
+
+        <p>On prend du recul : <span style="font-weight:900">ce qui te bloque</span> + <span style="font-weight:900">ce qui te coûte</span> + <span style="font-weight:900">ce qui t’épuise</span> + <span style="font-weight:900">ce qui te rend dépendant</span>.</p>
+
+        <img
+          src="ikigai-maptamob.png"
+          alt="Ikigai Map-Ta-Mob"
+          class="map-visual js-img"
+          data-img="ikigai-maptamob.png"
+          data-title="IKIGAI MAP-TA-MOB"
+        >
+
+        <button class="btn-outline" type="button" onclick="scrollSlide(1)">
+          PASSER AU MODÈLE À REMPLIR <i class="fa-solid fa-arrow-down"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- SLIDE 4 : IKIGAI VIERGE (affiché + champs éditables) -->
+    <section class="slide">
+      <div class="shape rect" style="background: var(--orange); width: 180px; height: 40px; top: 12%; right: 6%; opacity:.85;"></div>
+      <div class="content-box">
+        <div class="badge" style="background: var(--orange); color: var(--black);">ÉTAPE 3 : JE REMPLIS</div>
+
+        <h2 style="border-left: 10px solid var(--orange); padding-left: 10px;">
+          IKIGAI MOBILITÉ — MODÈLE À COMPLÉTER
+        </h2>
+
+        <div class="ikigai-wrap">
+          <div class="ikigai-canvas js-img" data-img="ikigai-vierge.png" data-title="IKIGAI VIERGE (APERÇU)">
+            <img src="ikigai-vierge.png" alt="Ikigai vierge" />
+
+            <!-- Champs (positions en % pour s'adapter au redimensionnement) -->
+            <div class="ikigai-field" style="left:6%; top:12%; width:41%; height:22%;">
+              <textarea placeholder="⏳ HORAIRES : ce qui coince (bus, décalé, tard, week-end...)"></textarea>
+            </div>
+
+            <div class="ikigai-field" style="left:53%; top:12%; width:41%; height:22%;">
+              <textarea placeholder="💸 COÛT : ce que ça te coûte (abonnements, essence, réparations...)"></textarea>
+            </div>
+
+            <div class="ikigai-field" style="left:6%; top:39%; width:41%; height:22%;">
+              <textarea placeholder="😮‍💨 FATIGUE : ce qui t’épuise (temps de trajet, correspondances...)"></textarea>
+            </div>
+
+            <div class="ikigai-field" style="left:53%; top:39%; width:41%; height:22%;">
+              <textarea placeholder="🤝 DÉPENDANCE : ce qui te rend dépendant (quelqu’un te dépose, pas de solution...)"></textarea>
+            </div>
+
+            <div class="ikigai-field" style="left:20%; top:66%; width:60%; height:18%;">
+              <textarea placeholder="✅ PRIORITÉ #1 : ce qu’on change en premier (avec ton conseiller)"></textarea>
+            </div>
+          </div>
+
+          <div class="mini-help">
+            <h3>Comment l’utiliser</h3>
+            <ul>
+              <li>Écris simple : <strong>des faits</strong>, pas des jugements.</li>
+              <li>Si tu hésites : note un exemple concret (trajet, heure, coût).</li>
+              <li>À la fin : choisis <strong>1 priorité</strong> à traiter en premier.</li>
+            </ul>
+
+            <div style="margin-top:1rem; display:flex; gap:.75rem; flex-wrap:wrap;">
+              <button class="btn" type="button" style="background: var(--black);" onclick="clearIkigai()">
+                <i class="fa-solid fa-eraser"></i> EFFACER
+              </button>
+              <button class="btn" type="button" style="background: var(--green); color: var(--black);" onclick="copyIkigaiToClipboard()">
+                <i class="fa-solid fa-copy"></i> COPIER LE TEXTE
+              </button>
+            </div>
+
+            <p style="text-align:left; font-size:.95rem; margin-top:1rem; opacity:.9;">
+              Astuce : en visio, tu peux partager ton écran et remplir en direct avec ton conseiller.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <button class="btn-outline" type="button" onclick="scrollSlide(1)">
+            JE PASSE AUX SOLUTIONS <i class="fa-solid fa-arrow-down"></i>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 4 : IKIGAI VIERGE (affiché directement) -->
+    <!-- SLIDE 5 : CODE DE LA ROUTE (clic titre => code.png / clic NEPH => neph-2.png / supprime lien examen) -->
     <section class="slide">
-      <div class="shape rect" style="background: var(--blue); width: 220px; height: 60px; top: 12%; right: 6%; opacity: 0.35;"></div>
-      <div class="content-box">
-        <div class="badge" style="background: var(--blue);">À COMPLÉTER</div>
-        <h2 style="border-bottom: 4px solid var(--blue);">MODÈLE VIERGE</h2>
-        <p style="max-width: 950px;">
-          Tu peux le remplir pendant/Après le webinaire (seul ou avec ton conseiller).
-        </p>
+      <div class="shape circle" style="background: var(--blue); width: 110px; height: 110px; top: 10%; right: 5%; opacity: 0.45;"></div>
 
-        <img src="ikigai-vierge.png" alt="Ikigai vierge" class="full-visual" onclick="openImage('ikigai-vierge.png','Modèle vierge à compléter')" style="cursor: zoom-in;">
-        <div style="margin-top: 1rem; font-weight: 700;">
-          <i class="fa-solid fa-pen" style="color: var(--blue);"></i>
-          Objectif : un mini plan d’actions simple (1 priorité, 2 solutions, 1 prochaine étape)
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 5 : CODE DE LA ROUTE (clic -> code.png) + NEPH (clic -> neph-2.png) -->
-    <section class="slide">
-      <div class="shape circle" style="background: var(--blue); width: 110px; height: 110px; top: 10%; right: 5%; opacity: 0.5;"></div>
       <div class="content-box">
         <div class="badge" style="background: var(--blue);">THÉORIE</div>
 
-        <h2 style="border-bottom: 4px solid var(--blue); cursor: pointer;" onclick="openImage('code.png','1. Code de la route (code.png)')">
-          1. LE CODE DE LA ROUTE <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--blue); margin-left: 6px;"></i>
+        <h2 class="js-img" data-img="code.png" data-title="1. LE CODE DE LA ROUTE" style="cursor:pointer; border-bottom:4px solid var(--blue);">
+          1. LE CODE DE LA ROUTE <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--blue); margin-left:10px;"></i>
         </h2>
 
-        <p>Le socle indispensable avant la conduite.</p>
+        <p>Le socle théorique indispensable avant la pratique.</p>
 
         <div class="grid-3">
-          <div class="card interactive" onclick="openImage('neph-2.png','NEPH : comment l’obtenir (neph-2.png)')">
-            <h3>
-              <i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i>
-              LE NEPH <i class="fa-solid fa-up-right-from-square" style="font-size:0.75em; margin-left:6px;"></i>
-            </h3>
+          <div class="card interactive js-img" data-img="neph-2.png" data-title="LE NEPH (ANTS)">
+            <h3><i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i> LE NEPH <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Ton identifiant candidat <strong>obligatoire</strong>.</p>
             <ul>
               <li>À demander sur <strong>ANTS.gouv.fr</strong></li>
-              <li>Pièce d’identité + justificatif + e-photo</li>
-              <li>Le visuel explique la démarche</li>
+              <li>Pièce d'identité + justificatif de domicile + e-photo</li>
+              <li>Délai : ~2 semaines</li>
             </ul>
           </div>
 
-          <div class="card interactive" onclick="openImage('code.png','Code : infos & repères (code.png)')">
-            <h3><i class="fa-solid fa-laptop-code" style="color: var(--blue);"></i> L’EXAMEN</h3>
-            <p>Inscription via opérateurs (La Poste, Dekra, etc.).</p>
+          <!-- EXAMEN : plus de lien cliquable -->
+          <div class="card">
+            <h3><i class="fa-solid fa-laptop-code" style="color: var(--blue);"></i> L'EXAMEN</h3>
+            <p>Inscription via opérateurs (La Poste, Dekra…).</p>
             <ul>
               <li>Coût : <strong>30 €</strong></li>
-              <li>Objectif : réussir (révision régulière)</li>
-              <li>Résultats rapidement</li>
+              <li>Objectif : 35/40</li>
+              <li>Résultats : 24h à 72h</li>
             </ul>
           </div>
 
           <div class="card interactive" onclick="openModal('handicap')">
             <h3><i class="fa-solid fa-wheelchair" style="color: var(--purple);"></i> HANDICAP ?</h3>
-            <p>Des aménagements existent.</p>
-            <p style="font-size: 0.9rem;"><strong>Clique</strong> pour voir les possibilités.</p>
+            <p>Des aménagements existent !</p>
+            <p style="font-size:0.9rem;">Temps supplémentaire, interprète… <br><strong>Clique pour voir.</strong></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 6 : PERMIS B (clic -> permis.png) + Apprentis (clic -> apprentis.png) + France Travail (clic -> ft.png) -->
+    <!-- SLIDE 6 : PERMIS B (clic titre => permis.png) + Apprentis => apprentis.png + FT => ft.png + Région => NA.png -->
     <section class="slide">
       <div class="content-box">
         <div class="badge" style="background: var(--red);">PRATIQUE</div>
 
-        <h2 style="border-bottom: 4px solid var(--red); cursor:pointer;" onclick="openImage('permis.png','2. Le permis B (permis.png)')">
-          2. LE PERMIS B <i class="fa-solid fa-eye" style="font-size: 0.6em; color: var(--red); margin-left: 6px;"></i>
+        <h2 class="js-img" data-img="permis.png" data-title="2. LE PERMIS B" style="cursor:pointer; border-bottom:4px solid var(--red);">
+          2. LE PERMIS B <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--red); margin-left:10px;"></i>
         </h2>
 
-        <p>Plusieurs aides existent : on choisit celles qui collent à ta situation.</p>
+        <p>Un investissement lourd que plusieurs aides peuvent alléger.</p>
 
         <div class="grid-3">
-          <div class="card interactive" onclick="openModal('region')">
-            <h3><i class="fa-solid fa-location-dot" style="color: var(--red);"></i> RÉGION N-AQUITAINE</h3>
-            <p><strong>400€ à 1200€</strong> (selon ressources).</p>
-            <p style="font-size:0.9rem;">Clique pour voir les conditions.</p>
+          <div class="card interactive js-img" data-img="NA.png" data-title="AIDE RÉGION NOUVELLE-AQUITAINE">
+            <h3><i class="fa-solid fa-location-dot" style="color: var(--red);"></i> RÉGION N-AQUITAINE <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
+            <p>De <strong>400€ à 1200€</strong> selon ressources.</p>
+            <p style="font-size:0.85rem;">Pour les 17-25 ans en parcours d'insertion (voir fiche).</p>
           </div>
 
-          <div class="card interactive" onclick="openImage('ft.png','Aide France Travail (ft.png)')">
-            <h3><i class="fa-solid fa-briefcase" style="color: var(--blue);"></i> FRANCE TRAVAIL</h3>
-            <p>Visuel récap (aide au permis).</p>
-            <p style="font-size:0.9rem;"><strong>Clique</strong> pour ouvrir ft.png</p>
+          <div class="card interactive js-img" data-img="ft.png" data-title="AIDE PERMIS — FRANCE TRAVAIL">
+            <h3><i class="fa-solid fa-briefcase" style="color: var(--blue);"></i> FRANCE TRAVAIL <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
+            <p>Jusqu'à <strong>1200€</strong>.</p>
+            <p style="font-size:0.85rem;">Si l’absence de permis est un frein à l’embauche (voir fiche).</p>
           </div>
 
-          <div class="card interactive" onclick="openImage('apprentis.png','Aide apprentis (apprentis.png)')">
-            <h3><i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> APPRENTIS</h3>
-            <p>Visuel récap (rubrique apprentis).</p>
-            <p style="font-size:0.9rem;"><strong>Clique</strong> pour ouvrir apprentis.png</p>
+          <div class="card interactive js-img" data-img="apprentis.png" data-title="AIDE AU PERMIS — APPRENTIS">
+            <h3><i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> AIDE APPRENTIS <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
+            <p>Forfait <strong>500€</strong>.</p>
+            <p style="font-size:0.85rem;">Dossier à demander au CFA (voir fiche).</p>
           </div>
 
           <div class="card interactive" onclick="openModal('engage')">
             <h3><i class="fa-solid fa-hand-holding-heart" style="color: var(--pink);"></i> JEUNES & ENGAGÉS</h3>
-            <p>Jusqu’à <strong>500€</strong> (selon dispositif).</p>
-            <p style="font-size:0.9rem;">Clique pour les infos.</p>
+            <p>Jusqu'à <strong>500€</strong>.</p>
+            <p style="font-size:0.85rem;">Contre mission citoyenne (Service Civique, SNU…).</p>
           </div>
 
           <div class="card interactive" onclick="openModal('un_euro')">
             <h3><i class="fa-solid fa-euro-sign" style="color: var(--orange);"></i> PERMIS 1€ / JOUR</h3>
-            <p><strong>Prêt à taux zéro</strong> (mensualités).</p>
-            <p style="font-size:0.9rem;">Clique pour comprendre.</p>
-          </div>
-
-          <div class="card interactive" onclick="openImage('permis.png','Tous les dispositifs permis (permis.png)')">
-            <h3><i class="fa-solid fa-layer-group" style="color: var(--red);"></i> VOIR LE TABLEAU</h3>
-            <p>Le visuel “permis.png” rassemble les options.</p>
-            <p style="font-size:0.9rem;"><strong>Clique</strong> pour agrandir.</p>
+            <p><strong>Prêt à taux zéro.</strong></p>
+            <p style="font-size:0.85rem;">Remboursement mensuel (ex : 30€).</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 7 : FAJ Mobilités (clic sur point 3 -> FAJ-Mobilités.png) -->
+    <!-- SLIDE 7 : FAJ (clic point 3 => FAJ-Mobilités) -->
     <section class="slide">
-      <div class="shape rect" style="background: var(--pink); width: 100%; height: 18px; top: 15%;"></div>
+      <div class="shape rect" style="background: var(--pink); width: 100%; height: 20px; top: 15%;"></div>
+
       <div class="content-box">
         <div class="badge" style="background: var(--pink);">COUP DE POUCE</div>
 
-        <h2 style="border-bottom: 4px solid var(--pink); cursor:pointer;" onclick="openImage('FAJ-Mobilités.png','3. Focus FAJ Mobilités (FAJ-Mobilités.png)')">
-          3. FOCUS : FAJ MOBILITÉS <i class="fa-solid fa-eye" style="font-size:0.6em; color:var(--pink); margin-left:6px;"></i>
+        <h2 class="js-img" data-img="FAJ-Mobilités.png" data-title="3. FOCUS : FAJ MOBILITÉS" style="cursor:pointer; border-bottom:4px solid var(--pink);">
+          3. FOCUS : FAJ MOBILITÉS <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--pink); margin-left:10px;"></i>
         </h2>
 
-        <p style="max-width: 950px;">
-          Une aide pour débloquer des coûts de mobilité quand ça bloque maintenant.
-        </p>
+        <p>Le Fonds d’Aide aux Jeunes : un filet de sécurité pour les obstacles financiers immédiats.</p>
 
         <div class="grid-2">
-          <div class="card interactive" onclick="openImage('FAJ-Mobilités.png','FAJ Mobilités : ce que ça peut financer')">
-            <h3><i class="fa-solid fa-circle-info" style="color: var(--pink);"></i> CE QUE ÇA PREND EN CHARGE</h3>
+          <div class="card" style="border-color: var(--pink);">
+            <h3><i class="fa-solid fa-gas-pump" style="color: var(--pink);"></i> DÉPLACEMENTS</h3>
             <ul>
-              <li>Le détail est dans le visuel</li>
-              <li><strong>Clique</strong> pour ouvrir en grand</li>
-              <li>Demande via conseiller Mission Locale</li>
+              <li>Aide plafonnée à <strong>450€ / an</strong></li>
+              <li>Base de <strong>0,20€ / km</strong></li>
+              <li>Pour : entretien, formation, RDV, démarches…</li>
             </ul>
           </div>
 
-          <div class="card">
-            <h3><i class="fa-solid fa-handshake" style="color: var(--pink);"></i> COMMENT L’OBTENIR</h3>
+          <div class="card" style="border-color: var(--pink);">
+            <h3><i class="fa-solid fa-wrench" style="color: var(--pink);"></i> RÉPARATIONS</h3>
             <ul>
-              <li>On part de ta carte Map-Ta-Mob</li>
-              <li>On justifie le besoin (emploi/formation/santé…)</li>
-              <li>On choisit la solution la plus utile</li>
+              <li>Jusqu'à <strong>500€</strong> pour l'entretien</li>
+              <li>Véhicule nécessaire au projet pro</li>
+              <li>Reste à charge : <strong>10%</strong></li>
             </ul>
           </div>
         </div>
+
+        <div style="margin-top:1rem; font-weight:800; color:var(--pink); text-align:center;">
+          <i class="fa-solid fa-info-circle"></i> Mobilisable via ton conseiller Mission Locale.
+        </div>
+
+        <button class="btn-outline" type="button" onclick="scrollSlide(1)" style="margin-top:1rem;">
+          CONTINUER <i class="fa-solid fa-arrow-down"></i>
+        </button>
       </div>
     </section>
 
-    <!-- SLIDE 8 : ACHAT & LOCATION (clic -> achat-loc.png) -->
+    <!-- SLIDE 8 : ACHAT & LOCATION (clic point 4 => achat-loc.png) -->
     <section class="slide">
       <div class="content-box">
-        <div class="badge" style="background: var(--green);">ALTERNATIVES</div>
+        <div class="badge" style="background: var(--green); color: var(--black);">ALTERNATIVES</div>
 
-        <h2 style="border-bottom: 4px solid var(--green); cursor:pointer;" onclick="openImage('achat-loc.png','4. Achat & Location (achat-loc.png)')">
-          4. ACHAT ET LOCATION <i class="fa-solid fa-eye" style="font-size:0.6em; color:var(--green); margin-left:6px;"></i>
+        <h2 class="js-img" data-img="achat-loc.png" data-title="4. ACHAT & LOCATION" style="cursor:pointer; border-bottom:4px solid var(--green);">
+          4. ACHAT ET LOCATION <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--green); margin-left:10px;"></i>
         </h2>
 
-        <p>Quand la banque classique ne peut pas t’aider.</p>
+        <p>Des solutions quand le système bancaire classique ne peut pas t'aider.</p>
 
         <div class="grid-3">
-          <div class="card interactive" onclick="openImage('achat-loc.png','Microcrédit / Location / Réparation (achat-loc.png)')">
+          <div class="card">
             <h3>MICROCRÉDIT ADIE</h3>
-            <p>Jusqu’à <strong>6 000€</strong>.</p>
-            <p style="font-size:0.9rem;">Achat / réparation véhicule.</p>
-          </div>
-
-          <div class="card interactive" onclick="openImage('achat-loc.png','Renault CareMakers (achat-loc.png)')">
-            <h3>RENAULT CAREMAKERS</h3>
-            <p>LOA véhicule neuf.</p>
-            <p style="font-size:0.9rem;">Dès <strong>135€ / mois</strong> (insertion).</p>
-          </div>
-
-          <div class="card interactive" onclick="openImage('achat-loc.png','Réparation solidaire (achat-loc.png)')">
-            <h3>RÉPARATION SOLIDAIRE</h3>
-            <p>Réparer moins cher.</p>
-            <p style="font-size:0.9rem;">Tarif social selon ressources.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 9 : PERMIS AM / BSR (clic -> scoot.png) -->
-    <section class="slide">
-      <div class="content-box">
-        <div class="badge" style="background: var(--orange);">BOUGER MALIN</div>
-
-        <h2 style="border-bottom: 4px solid var(--orange); cursor:pointer;" onclick="openImage('scoot.png','Permis AM / BSR (scoot.png)')">
-          PERMIS AM (BSR) <i class="fa-solid fa-eye" style="font-size:0.6em; color:var(--orange); margin-left:6px;"></i>
-        </h2>
-
-        <p>Parfois un deux-roues suffit pour débloquer un trajet (surtout si les horaires sont compliqués).</p>
-
-        <div class="grid-2">
-          <div class="card interactive" onclick="openImage('scoot.png','Permis AM : infos (scoot.png)')">
-            <h3><i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> VOIR LE VISUEL</h3>
-            <ul>
-              <li><strong>Clique</strong> pour ouvrir scoot.png</li>
-              <li>Idéal pour trajets moyens</li>
-              <li>Plus flexible que le bus parfois</li>
-            </ul>
+            <p>Emprunt jusqu'à <strong>6 000€</strong>.</p>
+            <p style="font-size:0.85rem;">Pour acheter ou réparer un véhicule.</p>
           </div>
 
           <div class="card">
-            <h3><i class="fa-solid fa-shield" style="color: var(--orange);"></i> SÉCURITÉ</h3>
-            <ul>
-              <li>Casque + équipement adaptés</li>
-              <li>Assurance obligatoire</li>
-              <li>On vérifie le coût total (achat + entretien)</li>
-            </ul>
+            <h3>RENAULT CAREMAKERS</h3>
+            <p>Location (LOA) véhicule neuf.</p>
+            <p style="font-size:0.85rem;">À partir de <strong>135€ / mois</strong> (insertion).</p>
+          </div>
+
+          <div class="card">
+            <h3>RÉPARATION SOLIDAIRE</h3>
+            <p>Réparer à moindre coût via un garage partenaire.</p>
+            <p style="font-size:0.85rem;"><strong>Tarif social</strong> selon ressources.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 10 : TRANSPORTS EN COMMUN (clic -> txxik-sncf-solidaire.png) -->
+    <!-- SLIDE 9 : TRANSPORTS EN COMMUN (clic => txik-sncf-solidaire.png) + Permis AM (clic => scoot.png) -->
     <section class="slide" style="background: var(--black); color: var(--white);">
-      <div class="shape circle" style="background: var(--red); width: 320px; height: 320px; right: -60px; bottom: -60px; opacity: 0.5;"></div>
+      <div class="shape circle" style="background: var(--red); width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.5;"></div>
 
       <div class="content-box">
         <div class="badge" style="background: var(--white); color: var(--black);">TRANSPORTS EN COMMUN</div>
 
-        <h2 style="border-bottom: 4px solid var(--red); cursor:pointer;" onclick="openImage('txxik-sncf-solidaire.png','Transports en commun : Txik Txak + SNCF solidaire (txxik-sncf-solidaire.png)')">
-          TXIK TXAK + OFFRES SOLIDAIRES <i class="fa-solid fa-eye" style="font-size:0.6em; color:var(--red); margin-left:6px;"></i>
+        <h2 class="js-img" data-img="txik-sncf-solidaire.png" data-title="TXIK TXAK + SNCF SOLIDAIRE" style="cursor:pointer; border-bottom:4px solid var(--red); color: var(--black);">
+          TXIK TXAK + SNCF SOLIDAIRE <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--red); margin-left:10px;"></i>
         </h2>
 
-        <p style="color: var(--white); opacity: 0.85;">
-          Tarifs adaptés aux revenus : l’objectif = que le prix ne t’empêche pas de bouger.
+        <p style="color: var(--white); opacity: .88;">
+          Tarifs adaptés + bons plans : pour payer moins cher et se déplacer plus facilement.
         </p>
 
         <div class="grid-2" style="margin-top: 1.5rem;">
-          <div class="card interactive" style="color: var(--black);" onclick="openImage('txxik-sncf-solidaire.png','Détails : Txik Txak / SNCF solidaire')">
-            <h3>VISUEL RÉCAP</h3>
-            <p style="font-weight: 800;">Clique pour ouvrir l’infographie complète.</p>
-            <p style="font-size:0.9rem;">(tarifs, conditions, démarches)</p>
+          <div class="card js-img" data-img="txik-sncf-solidaire.png" data-title="TARIFICATION SOLIDAIRE (APERÇU)" style="color: var(--black); cursor:pointer;">
+            <h3 style="border-bottom-color: var(--red);">TARIF SOLIDAIRE</h3>
+            <p style="color: var(--red); font-weight: 900; font-size: 1.6rem; margin-bottom:.4rem;">-50% à -75%</p>
+            <p style="font-size: .95rem;">Selon ton Quotient Familial (QF).</p>
+            <p style="font-size:.85rem; opacity:.9;">Clique pour voir la fiche (TXIK + SNCF).</p>
           </div>
 
-          <div class="card" style="color: var(--black);">
-            <h3>DÉMARCHE SIMPLE</h3>
+          <div class="card js-img" data-img="scoot.png" data-title="PERMIS AM (BSR)" style="color: var(--black); cursor:pointer;">
+            <h3 style="border-bottom-color: var(--orange);">
+              <i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> PERMIS AM (BSR) <i class="fa-solid fa-eye" style="font-size:.65em;"></i>
+            </h3>
             <ul>
-              <li>On part de tes revenus / QF</li>
-              <li>On obtient le bon profil tarifaire</li>
-              <li>On le charge sur la carte / compte</li>
+              <li>Dès 14 ans</li>
+              <li>8h de formation (sans examen)</li>
+              <li>Coût indicatif : 200€ à 350€</li>
             </ul>
+            <p style="font-size:.85rem; opacity:.9; margin-top:.5rem;">Clique pour ouvrir la fiche.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 11 : CONCLUSION -->
+    <!-- SLIDE 10 : CONCLUSION -->
     <section class="slide">
       <div class="shape circle" style="background: var(--orange); width: 200px; height: 200px; opacity: 0.5; top: 20%; left: 20%;"></div>
+
       <div class="content-box">
-        <h1>ON PASSE À L’ACTION</h1>
+        <h1>L'AVENIR EST À TA PORTÉE</h1>
 
-        <div class="card" style="border: 4px solid var(--black); padding: 2rem; max-width: 760px; width: 100%; align-items:center; text-align:center;">
-          <p style="font-size: 1.2rem; font-weight: 800;">Tu as la carte + les solutions.</p>
-          <p>Prochaine étape : choisir <strong>1 priorité</strong> et débloquer <strong>1 solution</strong> rapidement.</p>
+        <div class="card" style="border: 4px solid var(--black); padding: 2rem; max-width: 760px; align-items:center; text-align:center;">
+          <p style="font-size:1.2rem; font-weight:900;">Tu as les infos. Maintenant, on agit.</p>
+          <p>Ton conseiller Mission Locale t’aide à choisir les bonnes solutions et à monter les dossiers.</p>
 
-          <hr style="width: 50%; margin: 1rem auto; border: 1px solid var(--black);">
+          <hr style="width: 55%; margin: 1rem auto; border: 1px solid var(--black);">
 
           <img
             src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif"
@@ -671,29 +743,46 @@
             class="logo-ml"
             style="margin-bottom: 0;"
           >
-
-          <p style="font-weight: 800; margin-top: 10px;">Prends rendez-vous : on construit ton plan d’actions.</p>
+          <p style="font-weight:900; margin-top:10px;">Prends rendez-vous dès aujourd'hui !</p>
         </div>
       </div>
     </section>
 
   </div>
 
-  <!-- MODALE -->
+  <!-- MODALE (texte) -->
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="close-modal" onclick="closeModal()" aria-label="Fermer">×</button>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-label="Détails">
+      <button class="close-modal" type="button" onclick="closeModal()">×</button>
       <h2 id="modalTitle">TITRE</h2>
-      <div id="modalContent" class="modal-content">Contenu…</div>
+      <div id="modalContent" class="modal-content">Texte…</div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX (images) -->
+  <div class="img-overlay" id="imgOverlay" aria-hidden="true">
+    <div class="img-shell" role="dialog" aria-modal="true" aria-label="Image">
+      <div class="img-topbar">
+        <div class="img-title" id="imgTitle">IMAGE</div>
+        <div class="img-actions">
+          <button class="img-iconbtn" type="button" title="Zoom -" onclick="zoomImg(-0.15)"><i class="fa-solid fa-minus"></i></button>
+          <button class="img-iconbtn" type="button" title="Zoom +" onclick="zoomImg(0.15)"><i class="fa-solid fa-plus"></i></button>
+          <button class="img-iconbtn" type="button" title="Réinitialiser" onclick="resetImgZoom()"><i class="fa-solid fa-rotate-left"></i></button>
+          <button class="img-iconbtn" type="button" title="Fermer" onclick="closeImg()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="img-stage" id="imgStage">
+        <img id="imgViewer" alt="Aperçu" />
+      </div>
     </div>
   </div>
 
   <script>
-    // NAVIGATION
+    /* NAV */
     const container = document.getElementById('container');
     const progressBar = document.getElementById('progressBar');
 
-    function scrollSlide(direction) {
+    function scrollSlide(direction){
       const h = window.innerHeight;
       container.scrollBy({ top: h * direction, behavior: 'smooth' });
     }
@@ -705,76 +794,147 @@
       progressBar.style.width = scrolled + "%";
     });
 
-    // MODALES : texte + images
+    /* TEXT MODAL */
     const modalOverlay = document.getElementById('modalOverlay');
     const modalTitle = document.getElementById('modalTitle');
     const modalContent = document.getElementById('modalContent');
 
     const modalData = {
-      'handicap': {
+      handicap: {
         title: "AMÉNAGEMENTS HANDICAP",
         text:
-          "<p>Des aménagements sont possibles selon la situation :</p>" +
+          "<p>Des aménagements peuvent être demandés :</p>" +
           "<ul>" +
           "<li>Temps supplémentaire</li>" +
-          "<li>Aides de compréhension / modalités adaptées</li>" +
+          "<li>Interprète (Langue des Signes…)</li>" +
+          "<li>Conditions adaptées selon situation</li>" +
           "</ul>" +
-          "<p>Parle-en à ton auto-école ou à ton conseiller avant l’inscription.</p>"
+          "<p>Parles-en dès l'inscription (auto-école / conseiller).</p>"
       },
-      'region': {
-        title: "AIDE RÉGION NOUVELLE-AQUITAINE",
+      engage: {
+        title: "JEUNES & ENGAGÉS (CD64)",
         text:
-          "<p><strong>Montant :</strong> 400€ à 1200€ (selon ressources).</p>" +
-          "<p><strong>Public :</strong> 17–25 ans en parcours d’insertion, avec un projet pro qui nécessite le permis.</p>" +
-          "<p><strong>Démarche :</strong> avec ton conseiller (justificatifs + cohérence projet).</p>"
+          "<p><strong>Montant :</strong> jusqu’à 500€.</p>" +
+          "<p><strong>Principe :</strong> aide contre mission citoyenne (ex : Service Civique, SNU…).</p>"
       },
-      'engage': {
-        title: "JEUNES & ENGAGÉS",
-        text:
-          "<p><strong>Montant :</strong> jusqu’à 500€ (selon dispositif).</p>" +
-          "<p><strong>Logique :</strong> un coup de pouce en lien avec un engagement (service civique, mission citoyenne…).</p>"
-      },
-      'un_euro': {
+      un_euro: {
         title: "PERMIS À 1€ / JOUR",
         text:
           "<p>C’est un <strong>prêt à taux zéro</strong> : l’État paie les intérêts.</p>" +
-          "<p>Tu rembourses ensuite par mensualités (ex : 30€/mois).</p>"
+          "<p>Tu rembourses une mensualité (ex : 30€) pendant la formation.</p>"
       }
     };
 
-    function openModal(key) {
-      if (!modalData[key]) return;
-      modalTitle.innerText = modalData[key].title;
+    function openModal(key){
+      if(!modalData[key]) return;
+      modalTitle.textContent = modalData[key].title;
       modalContent.innerHTML = modalData[key].text;
       modalOverlay.classList.add('active');
-      modalOverlay.setAttribute('aria-hidden', 'false');
+      modalOverlay.setAttribute('aria-hidden','false');
     }
-
-    function openImage(src, caption) {
-      modalTitle.innerText = caption || "Aperçu";
-      modalContent.innerHTML =
-        '<img class="modal-image" src="' + src + '" alt="' + (caption || 'Aperçu') + '">' +
-        (caption ? '<div class="modal-caption">' + caption + '</div>' : '');
-      modalOverlay.classList.add('active');
-      modalOverlay.setAttribute('aria-hidden', 'false');
-    }
-
-    function closeModal() {
+    function closeModal(){
       modalOverlay.classList.remove('active');
-      modalOverlay.setAttribute('aria-hidden', 'true');
-      modalContent.innerHTML = "";
+      modalOverlay.setAttribute('aria-hidden','true');
+    }
+    modalOverlay.addEventListener('click', (e) => {
+      if(e.target === modalOverlay) closeModal();
+    });
+
+    /* IMAGE LIGHTBOX */
+    const imgOverlay = document.getElementById('imgOverlay');
+    const imgViewer = document.getElementById('imgViewer');
+    const imgTitle = document.getElementById('imgTitle');
+    let currentZoom = 1;
+
+    function openImg(src, title){
+      if(!src) return;
+      imgTitle.textContent = title || "IMAGE";
+      imgViewer.src = encodeURI(src);
+      imgViewer.alt = title || "Image";
+      currentZoom = 1;
+      imgViewer.style.transform = `scale(${currentZoom})`;
+      imgOverlay.classList.add('active');
+      imgOverlay.setAttribute('aria-hidden','false');
+    }
+    function closeImg(){
+      imgOverlay.classList.remove('active');
+      imgOverlay.setAttribute('aria-hidden','true');
+      imgViewer.src = "";
+    }
+    function zoomImg(delta){
+      currentZoom = Math.max(0.6, Math.min(3, currentZoom + delta));
+      imgViewer.style.transform = `scale(${currentZoom})`;
+    }
+    function resetImgZoom(){
+      currentZoom = 1;
+      imgViewer.style.transform = `scale(${currentZoom})`;
     }
 
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
+    imgOverlay.addEventListener('click', (e) => {
+      if(e.target === imgOverlay) closeImg();
     });
 
-    // CLAVIER
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "ArrowDown") scrollSlide(1);
-      if (e.key === "ArrowUp") scrollSlide(-1);
-      if (e.key === "Escape") closeModal();
+    // Raccroche TOUTES les images : clic -> lightbox
+    document.querySelectorAll('.js-img').forEach(el => {
+      el.addEventListener('click', (ev) => {
+        // éviter que cliquer dans un textarea de l'ikigai déclenche la lightbox
+        if(ev.target && (ev.target.tagName === 'TEXTAREA')) return;
+
+        const src = el.getAttribute('data-img') || (el.tagName === 'IMG' ? el.getAttribute('src') : null);
+        const title = el.getAttribute('data-title') || "IMAGE";
+        if(src) openImg(src, title);
+      });
     });
+
+    /* IKIGAI : effacer + copier */
+    function clearIkigai(){
+      document.querySelectorAll('.ikigai-field textarea').forEach(t => t.value = "");
+    }
+
+    async function copyIkigaiToClipboard(){
+      const fields = Array.from(document.querySelectorAll('.ikigai-field textarea')).map(t => t.value.trim());
+      const labels = [
+        "⏳ HORAIRES",
+        "💸 COÛT",
+        "😮‍💨 FATIGUE",
+        "🤝 DÉPENDANCE",
+        "✅ PRIORITÉ #1"
+      ];
+      const text = fields.map((v,i) => `${labels[i]} : ${v || "(vide)"}`).join("\n\n");
+      try{
+        await navigator.clipboard.writeText(text);
+        openModalToast("Copié ✅", "Le contenu de l'ikigai a été copié dans le presse-papiers.");
+      }catch(err){
+        openModalToast("Impossible de copier", "Ton navigateur bloque le copier-coller. Sélectionne le texte manuellement.");
+      }
+    }
+
+    function openModalToast(title, message){
+      modalTitle.textContent = title;
+      modalContent.innerHTML = `<p>${message}</p>`;
+      modalOverlay.classList.add('active');
+      modalOverlay.setAttribute('aria-hidden','false');
+    }
+
+    /* CLAVIER */
+    document.addEventListener('keydown', (e) => {
+      if(e.key === "ArrowDown") scrollSlide(1);
+      if(e.key === "ArrowUp") scrollSlide(-1);
+      if(e.key === "Escape"){
+        closeModal();
+        closeImg();
+      }
+      if(e.key === "+" || e.key === "=") zoomImg(0.15);
+      if(e.key === "-") zoomImg(-0.15);
+    });
+
+    /* Bonus : zoom à la molette sur l'image (quand la lightbox est ouverte) */
+    document.getElementById('imgStage').addEventListener('wheel', (e) => {
+      if(!imgOverlay.classList.contains('active')) return;
+      e.preventDefault();
+      zoomImg(e.deltaY > 0 ? -0.08 : 0.08);
+    }, { passive: false });
   </script>
 </body>
 </html>
+
