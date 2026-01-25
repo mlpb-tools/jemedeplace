@@ -232,7 +232,7 @@
     }
     .close-modal:hover{transform:rotate(90deg);color:var(--red)}
 
-    /* Image lightbox */
+    /* Image/PDF lightbox */
     .img-overlay{
       position:fixed;inset:0;
       background:rgba(23,23,24,.96);
@@ -284,6 +284,7 @@
       background:#fff;
       display:flex;align-items:center;justify-content:center;
       overflow:hidden;
+      position:relative;
     }
     .img-stage img{
       max-width:100%;
@@ -291,6 +292,13 @@
       object-fit:contain;
       transform-origin:center center;
       transition:transform .12s ease-out;
+    }
+    .img-stage iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:none;
+      background:#fff;
     }
 
     /* Ikigai editable overlay */
@@ -353,62 +361,8 @@
     .mini-help li{margin:.45rem 0;position:relative;padding-left:1rem}
     .mini-help li::before{content:"■";color:var(--orange);position:absolute;left:0;font-size:.8em}
 
-    /* Mini calculator (Txik Txak) */
-    .calc{
-      width:100%;
-      border:var(--border);
-      box-shadow:var(--shadow);
-      padding:1.2rem;
-      background:var(--white);
-      margin-top:1rem;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1rem;
-      align-items:end;
-    }
-    .calc label{
-      font-weight:900;
-      text-transform:uppercase;
-      font-size:.85rem;
-      display:block;
-      margin-bottom:.4rem;
-    }
-    .calc input{
-      width:100%;
-      padding:.9rem 1rem;
-      border:var(--border);
-      font-family:'Inter',sans-serif;
-      font-size:1rem;
-      outline:none;
-    }
-    .calc .result{
-      grid-column:1 / -1;
-      border:var(--border);
-      padding:1rem;
-      background:#fff;
-      font-weight:900;
-      text-transform:uppercase;
-      display:flex;
-      flex-wrap:wrap;
-      gap:.6rem 1rem;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.45rem .8rem;
-      border:var(--border);
-      background:var(--white);
-      font-weight:900;
-      text-transform:uppercase;
-      font-size:.85rem;
-    }
-
     @media(max-width:900px){
       .ikigai-wrap{grid-template-columns:1fr}
-      .calc{grid-template-columns:1fr}
     }
     @media(max-width:768px){
       h1{font-size:2rem}
@@ -461,14 +415,14 @@
       <div class="content-box">
         <div class="badge" style="background: var(--blue);">THÉORIE</div>
 
-        <h2 class="js-img" data-img="code.png" data-title="1. LE CODE DE LA ROUTE" style="cursor:pointer; border-bottom:4px solid var(--blue);">
+        <h2 class="js-open" data-src="code.png" data-title="1. LE CODE DE LA ROUTE" style="cursor:pointer; border-bottom:4px solid var(--blue);">
           1. LE CODE DE LA ROUTE <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--blue); margin-left:10px;"></i>
         </h2>
 
         <p>Le socle théorique indispensable avant la pratique.</p>
 
         <div class="grid-3">
-          <div class="card interactive js-img" data-img="neph-2.png" data-title="LE NEPH (ANTS)">
+          <div class="card interactive js-open" data-src="neph-2.png" data-title="LE NEPH (ANTS)">
             <h3><i class="fa-solid fa-fingerprint" style="color: var(--blue);"></i> LE NEPH <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Ton identifiant candidat <strong>obligatoire</strong>.</p>
             <ul>
@@ -497,26 +451,25 @@
       </div>
     </section>
 
-    <!-- SLIDE 3 : PERMIS B (ajout : guide permis NA complet + correction barème 800) -->
+    <!-- SLIDE 3 : PERMIS B (Guide -> guidepermisb.png) -->
     <section class="slide">
       <div class="content-box">
         <div class="badge" style="background: var(--red);">PRATIQUE</div>
 
-        <h2 class="js-img" data-img="permis.png" data-title="2. LE PERMIS B" style="cursor:pointer; border-bottom:4px solid var(--red);">
+        <h2 class="js-open" data-src="permis.png" data-title="2. LE PERMIS B" style="cursor:pointer; border-bottom:4px solid var(--red);">
           2. LE PERMIS B <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--red); margin-left:10px;"></i>
         </h2>
 
         <p>Un investissement lourd que plusieurs aides peuvent alléger.</p>
 
         <div class="grid-3">
-          <!-- NOUVEAU : guide complet (image fournie) -->
-          <div class="card interactive js-img" data-img="permis-na-guide.png" data-title="GUIDE — FINANCER LE PERMIS B (NOUVELLE-AQUITAINE)">
+          <div class="card interactive js-open" data-src="guidepermisb.png" data-title="GUIDE — FINANCER LE PERMIS B (NOUVELLE-AQUITAINE)">
             <h3><i class="fa-solid fa-file-lines" style="color: var(--red);"></i> LE GUIDE (APERÇU) <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Infographie complète : dispositifs principaux + montants.</p>
             <p style="font-size:0.85rem;">Clique pour afficher l’image (plein écran).</p>
           </div>
 
-          <div class="card interactive js-img" data-img="NA.png" data-title="AIDE RÉGION NOUVELLE-AQUITAINE">
+          <div class="card interactive js-open" data-src="NA.png" data-title="AIDE RÉGION NOUVELLE-AQUITAINE">
             <h3><i class="fa-solid fa-location-dot" style="color: var(--red);"></i> RÉGION N-AQUITAINE <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Jusqu’à <strong>1200€</strong> (selon revenus).</p>
             <ul>
@@ -526,13 +479,13 @@
             </ul>
           </div>
 
-          <div class="card interactive js-img" data-img="ft.png" data-title="AIDE PERMIS — FRANCE TRAVAIL">
+          <div class="card interactive js-open" data-src="ft.png" data-title="AIDE PERMIS — FRANCE TRAVAIL">
             <h3><i class="fa-solid fa-briefcase" style="color: var(--blue);"></i> FRANCE TRAVAIL <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Jusqu'à <strong>1200€</strong>.</p>
             <p style="font-size:0.85rem;">Si l’absence de permis est un frein à l’embauche (voir fiche).</p>
           </div>
 
-          <div class="card interactive js-img" data-img="apprentis.png" data-title="AIDE AU PERMIS — APPRENTIS">
+          <div class="card interactive js-open" data-src="apprentis.png" data-title="AIDE AU PERMIS — APPRENTIS">
             <h3><i class="fa-solid fa-user-graduate" style="color: var(--green);"></i> AIDE APPRENTIS <i class="fa-solid fa-eye" style="font-size:.65em;"></i></h3>
             <p>Forfait <strong>500€</strong>.</p>
             <p style="font-size:0.85rem;">Dossier à demander au CFA (voir fiche).</p>
@@ -560,7 +513,7 @@
       <div class="content-box">
         <div class="badge" style="background: var(--pink);">COUP DE POUCE</div>
 
-        <h2 class="js-img" data-img="FAJ-Mobilités.png" data-title="3. FOCUS : FAJ MOBILITÉS" style="cursor:pointer; border-bottom:4px solid var(--pink);">
+        <h2 class="js-open" data-src="FAJ-Mobilités.png" data-title="3. FOCUS : FAJ MOBILITÉS" style="cursor:pointer; border-bottom:4px solid var(--pink);">
           3. FOCUS : FAJ MOBILITÉS <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--pink); margin-left:10px;"></i>
         </h2>
 
@@ -601,7 +554,7 @@
       <div class="content-box">
         <div class="badge" style="background: var(--green); color: var(--black);">ALTERNATIVES</div>
 
-        <h2 class="js-img" data-img="achat-loc.png" data-title="4. ACHAT & LOCATION" style="cursor:pointer; border-bottom:4px solid var(--green);">
+        <h2 class="js-open" data-src="achat-loc.png" data-title="4. ACHAT & LOCATION" style="cursor:pointer; border-bottom:4px solid var(--green);">
           4. ACHAT ET LOCATION <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--green); margin-left:10px;"></i>
         </h2>
 
@@ -629,96 +582,42 @@
       </div>
     </section>
 
-    <!-- SLIDE 6 : TXIK TXAK (NOUVEAU : pas-à-pas + barèmes + mini calcul QF) -->
+    <!-- SLIDE 6 : TRANSPORTS EN COMMUN (2 BLOCS distincts : TxikTxak PNG / SNCF PDF) -->
     <section class="slide" style="background: var(--black); color: var(--white);">
       <div class="shape circle" style="background: var(--red); width: 300px; height: 300px; right: -50px; bottom: -50px; opacity: 0.5;"></div>
 
       <div class="content-box">
         <div class="badge" style="background: var(--white); color: var(--black);">TRANSPORTS EN COMMUN</div>
 
-        <h2 class="js-img" data-img="solidaire-txiktxak.png" data-title="COMMENT BÉNÉFICIER DU TARIF SOLIDAIRE TXIK TXAK ?" style="cursor:pointer; border-bottom:4px solid var(--red); color: var(--black);">
-          TARIF SOLIDAIRE TXIK TXAK <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--red); margin-left:10px;"></i>
+        <h2 style="border-bottom:4px solid var(--red); color: var(--black);">
+          TARIFS SOLIDAIRES
         </h2>
 
         <p style="color: var(--white); opacity: .88; max-width: 980px;">
-          Le pas-à-pas + barèmes (Solidaire+, Solidaire, Solidaire -28 ans). Clique sur l’image pour l’ouvrir en grand.
+          Clique sur le bloc correspondant pour ouvrir la fiche (Txik Txak / SNCF).
         </p>
 
-        <img
-          src="solidaire-txiktxak.png"
-          alt="Tarif Solidaire Txik Txak (pas-à-pas)"
-          class="map-visual js-img"
-          data-img="solidaire-txiktxak.png"
-          data-title="TARIF SOLIDAIRE TXIK TXAK — PAS-À-PAS"
-          style="max-height:46vh;"
-        >
-
-        <!-- Mini calcul QF (uniquement basé sur la formule affichée dans l'infographie) -->
-        <div class="calc" style="color:var(--black);">
-          <div>
-            <label for="rfrTotal">Revenu fiscal de référence (RFR)</label>
-            <input id="rfrTotal" type="number" inputmode="numeric" placeholder="Ex : 19500" min="0">
-          </div>
-          <div>
-            <label for="parts">Nombre de parts fiscales</label>
-            <input id="parts" type="number" inputmode="numeric" placeholder="Ex : 2" min="0" step="0.25">
-          </div>
-
-          <div class="result" id="qfResult">
-            <span class="chip"><i class="fa-solid fa-calculator"></i> QF : —</span>
-            <span class="chip"><i class="fa-solid fa-user"></i> Profil : —</span>
-            <span class="chip"><i class="fa-solid fa-percent"></i> Réduction : —</span>
-          </div>
-
-          <div style="grid-column:1/-1; font-size:.9rem; font-weight:800; line-height:1.35;">
-            <div style="margin-top:.2rem;">
-              Barèmes visibles :
-              <span style="color:var(--red)">Solidaire+</span> : QF <strong>&lt; 430€</strong> → <strong>jusqu’à 75%</strong> •
-              <span style="color:var(--orange)">Solidaire</span> : <strong>431–620€</strong> → <strong>jusqu’à 50%</strong> •
-              <span style="color:var(--green)">Solidaire -28 ans</span> : <strong>50%</strong> (selon conditions indiquées).
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-outline" type="button" onclick="scrollSlide(1)" style="margin-top:1rem; color:white; border-color:white;">
-          CONTINUER <i class="fa-solid fa-arrow-down"></i>
-        </button>
-      </div>
-    </section>
-
-    <!-- SLIDE 7 : SNCF + Permis AM (conservé) -->
-    <section class="slide" style="background: var(--black); color: var(--white);">
-      <div class="shape circle" style="background: var(--purple); width: 260px; height: 260px; left: -60px; bottom: -60px; opacity: 0.45;"></div>
-
-      <div class="content-box">
-        <div class="badge" style="background: var(--white); color: var(--black);">TRANSPORTS EN COMMUN</div>
-
-        <h2 class="js-img" data-img="txik-sncf-solidaire.png" data-title="TXIK TXAK + SNCF SOLIDAIRE" style="cursor:pointer; border-bottom:4px solid var(--red); color: var(--black);">
-          TXIK TXAK + SNCF SOLIDAIRE <i class="fa-solid fa-eye" style="font-size:.6em; color: var(--red); margin-left:10px;"></i>
-        </h2>
-
-        <p style="color: var(--white); opacity: .88;">
-          Tarifs adaptés + bons plans : pour payer moins cher et se déplacer plus facilement.
-        </p>
-
-        <div class="grid-2" style="margin-top: 1.5rem;">
-          <div class="card js-img" data-img="txik-sncf-solidaire.png" data-title="TARIFICATION SOLIDAIRE (APERÇU)" style="color: var(--black); cursor:pointer;">
-            <h3 style="border-bottom-color: var(--red);">TARIF SOLIDAIRE (APERÇU)</h3>
-            <p style="color: var(--red); font-weight: 900; font-size: 1.6rem; margin-bottom:.4rem;">-50% à -75%</p>
-            <p style="font-size: .95rem;">Selon ton Quotient Familial (QF).</p>
-            <p style="font-size:.85rem; opacity:.9;">Clique pour voir la fiche.</p>
-          </div>
-
-          <div class="card js-img" data-img="scoot.png" data-title="PERMIS AM (BSR)" style="color: var(--black); cursor:pointer;">
-            <h3 style="border-bottom-color: var(--orange);">
-              <i class="fa-solid fa-motorcycle" style="color: var(--orange);"></i> PERMIS AM (BSR) <i class="fa-solid fa-eye" style="font-size:.65em;"></i>
+        <div class="grid-2" style="margin-top: 1.2rem;">
+          <!-- TXIK TXAK SOLIDAIRE -> PNG -->
+          <div class="card interactive js-open" data-src="solidaire-txiktxak.png" data-title="TARIF SOLIDAIRE TXIK TXAK — PAS-À-PAS" style="color: var(--black);">
+            <h3 style="border-bottom-color: var(--red);">
+              <i class="fa-solid fa-bus" style="color: var(--red);"></i>
+              TXIK TXAK SOLIDAIRE <i class="fa-solid fa-eye" style="font-size:.65em;"></i>
             </h3>
-            <ul>
-              <li>Dès 14 ans</li>
-              <li>8h de formation (sans examen)</li>
-              <li>Coût indicatif : 200€ à 350€</li>
-            </ul>
-            <p style="font-size:.85rem; opacity:.9; margin-top:.5rem;">Clique pour ouvrir la fiche.</p>
+            <p style="font-weight:900; font-size:1.2rem; margin-bottom:.3rem;">-50% à -75%</p>
+            <p style="font-size:.95rem;">Pas-à-pas + barèmes (Solidaire+, Solidaire, -28 ans).</p>
+            <p style="font-size:.85rem; opacity:.9;">Clique pour ouvrir <strong>solidaire-txiktxak.png</strong>.</p>
+          </div>
+
+          <!-- SNCF SOLIDAIRE -> PDF -->
+          <div class="card interactive js-open" data-src="RNA-CarteSolidaire.pdf" data-title="SNCF — CARTE SOLIDAIRE (PDF)" style="color: var(--black);">
+            <h3 style="border-bottom-color: var(--purple);">
+              <i class="fa-solid fa-train" style="color: var(--purple);"></i>
+              SNCF SOLIDAIRE <i class="fa-solid fa-eye" style="font-size:.65em;"></i>
+            </h3>
+            <p style="font-weight:900; font-size:1.2rem; margin-bottom:.3rem;">Carte / réductions</p>
+            <p style="font-size:.95rem;">Fiche officielle SNCF (PDF).</p>
+            <p style="font-size:.85rem; opacity:.9;">Clique pour ouvrir <strong>RNA-CarteSolidaire.pdf</strong>.</p>
           </div>
         </div>
 
@@ -728,19 +627,19 @@
       </div>
     </section>
 
-    <!-- SLIDE 8 : À LA FIN — MAP-TA-MOB (déplacé ici) -->
+    <!-- SLIDE 7 : À LA FIN — MAP-TA-MOB (déplacé ici) -->
     <section class="slide" style="background: var(--black);">
       <div class="content-box">
         <div style="display:flex; justify-content:space-between; width:100%; align-items:center; margin-bottom: 1rem; gap:1rem; flex-wrap:wrap;">
           <h2 style="color: var(--black); margin: 0; font-size: 1.5rem;">À LA FIN : MAP-TA-MOB</h2>
-          <p style="color: var(--white); margin: 0; font-size: 0.95rem; opacity:.9;">Quand tu as compris les solutions, tu peux faire ton diagnostic.</p>
+          <p style="color: var(--white); margin: 0; font-size: 0.95rem; opacity:.9;">Quand tu as compris les solutions, fais ton diagnostic.</p>
         </div>
 
         <img
           src="2.png"
           alt="Map-Ta-Mob — visualiser (2.png)"
-          class="map-visual js-img"
-          data-img="2.png"
+          class="map-visual js-open"
+          data-src="2.png"
           data-title="MAP-TA-MOB — VISUALISER"
         >
 
@@ -756,7 +655,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 9 : À LA FIN — IKIGAI (exemple) -->
+    <!-- SLIDE 8 : À LA FIN — IKIGAI (EXEMPLE) -->
     <section class="slide">
       <div class="shape circle" style="background: var(--green); width: 120px; height: 120px; top: 10%; left: 6%; opacity: 0.5;"></div>
       <div class="content-box">
@@ -771,8 +670,8 @@
         <img
           src="ikigai-maptamob.png"
           alt="Ikigai Map-Ta-Mob"
-          class="map-visual js-img"
-          data-img="ikigai-maptamob.png"
+          class="map-visual js-open"
+          data-src="ikigai-maptamob.png"
           data-title="IKIGAI MAP-TA-MOB"
         >
 
@@ -782,7 +681,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 10 : À LA FIN — IKIGAI vierge (modèle à compléter) -->
+    <!-- SLIDE 9 : À LA FIN — IKIGAI VIERGE -->
     <section class="slide">
       <div class="shape rect" style="background: var(--orange); width: 180px; height: 40px; top: 12%; right: 6%; opacity:.85;"></div>
       <div class="content-box">
@@ -793,10 +692,9 @@
         </h2>
 
         <div class="ikigai-wrap">
-          <div class="ikigai-canvas js-img" data-img="ikigai-vierge.png" data-title="IKIGAI VIERGE (APERÇU)">
+          <div class="ikigai-canvas js-open" data-src="ikigai-vierge.png" data-title="IKIGAI VIERGE (APERÇU)">
             <img src="ikigai-vierge.png" alt="Ikigai vierge" />
 
-            <!-- Champs (positions en % pour s'adapter au redimensionnement) -->
             <div class="ikigai-field" style="left:6%; top:12%; width:41%; height:22%;">
               <textarea placeholder="⏳ HORAIRES : ce qui coince (bus, décalé, tard, week-end...)"></textarea>
             </div>
@@ -849,7 +747,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 11 : CONCLUSION -->
+    <!-- SLIDE 10 : CONCLUSION -->
     <section class="slide">
       <div class="shape circle" style="background: var(--orange); width: 200px; height: 200px; opacity: 0.5; top: 20%; left: 20%;"></div>
 
@@ -884,32 +782,26 @@
     </div>
   </div>
 
-  <!-- LIGHTBOX (images) -->
+  <!-- LIGHTBOX (images + PDF) -->
   <div class="img-overlay" id="imgOverlay" aria-hidden="true">
-    <div class="img-shell" role="dialog" aria-modal="true" aria-label="Image">
+    <div class="img-shell" role="dialog" aria-modal="true" aria-label="Document">
       <div class="img-topbar">
-        <div class="img-title" id="imgTitle">IMAGE</div>
+        <div class="img-title" id="imgTitle">DOCUMENT</div>
         <div class="img-actions">
           <button class="img-iconbtn" type="button" title="Zoom -" onclick="zoomImg(-0.15)"><i class="fa-solid fa-minus"></i></button>
           <button class="img-iconbtn" type="button" title="Zoom +" onclick="zoomImg(0.15)"><i class="fa-solid fa-plus"></i></button>
           <button class="img-iconbtn" type="button" title="Réinitialiser" onclick="resetImgZoom()"><i class="fa-solid fa-rotate-left"></i></button>
-          <button class="img-iconbtn" type="button" title="Fermer" onclick="closeImg()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="img-iconbtn" type="button" title="Fermer" onclick="closeMedia()"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
       <div class="img-stage" id="imgStage">
         <img id="imgViewer" alt="Aperçu" />
+        <iframe id="pdfViewer" title="Document PDF"></iframe>
       </div>
     </div>
   </div>
 
   <script>
-    /* IMPORTANT :
-      - Place dans le même dossier que ce HTML les nouveaux fichiers images :
-        - solidaire-txiktxak.png
-        - permis-na-guide.png  (renomme ton image "Votre Guide pour Financer le Permis B..." ainsi)
-      - Les autres (2.png, ikigai-..., etc.) restent inchangés.
-    */
-
     /* NAV */
     const container = document.getElementById('container');
     const progressBar = document.getElementById('progressBar');
@@ -972,49 +864,74 @@
       if(e.target === modalOverlay) closeModal();
     });
 
-    /* IMAGE LIGHTBOX */
+    /* LIGHTBOX : IMAGE + PDF */
     const imgOverlay = document.getElementById('imgOverlay');
     const imgViewer = document.getElementById('imgViewer');
+    const pdfViewer = document.getElementById('pdfViewer');
     const imgTitle = document.getElementById('imgTitle');
     let currentZoom = 1;
 
-    function openImg(src, title){
+    function isPdf(src){
+      return typeof src === "string" && src.toLowerCase().trim().endsWith(".pdf");
+    }
+
+    function openMedia(src, title){
       if(!src) return;
-      imgTitle.textContent = title || "IMAGE";
-      imgViewer.src = encodeURI(src);
-      imgViewer.alt = title || "Image";
+
+      imgTitle.textContent = title || "DOCUMENT";
       currentZoom = 1;
-      imgViewer.style.transform = `scale(${currentZoom})`;
+
+      if(isPdf(src)){
+        imgViewer.style.display = "none";
+        imgViewer.src = "";
+        pdfViewer.style.display = "block";
+        pdfViewer.src = encodeURI(src);
+      }else{
+        pdfViewer.style.display = "none";
+        pdfViewer.src = "";
+        imgViewer.style.display = "block";
+        imgViewer.src = encodeURI(src);
+        imgViewer.alt = title || "Image";
+        imgViewer.style.transform = `scale(${currentZoom})`;
+      }
+
       imgOverlay.classList.add('active');
       imgOverlay.setAttribute('aria-hidden','false');
     }
-    function closeImg(){
+
+    function closeMedia(){
       imgOverlay.classList.remove('active');
       imgOverlay.setAttribute('aria-hidden','true');
       imgViewer.src = "";
+      pdfViewer.src = "";
+      imgViewer.style.display = "block";
+      pdfViewer.style.display = "none";
+      currentZoom = 1;
+      imgViewer.style.transform = `scale(${currentZoom})`;
     }
+
     function zoomImg(delta){
+      if(imgViewer.style.display === "none") return; // pas de zoom sur PDF
       currentZoom = Math.max(0.6, Math.min(3, currentZoom + delta));
       imgViewer.style.transform = `scale(${currentZoom})`;
     }
     function resetImgZoom(){
+      if(imgViewer.style.display === "none") return;
       currentZoom = 1;
       imgViewer.style.transform = `scale(${currentZoom})`;
     }
 
     imgOverlay.addEventListener('click', (e) => {
-      if(e.target === imgOverlay) closeImg();
+      if(e.target === imgOverlay) closeMedia();
     });
 
-    // Raccroche TOUTES les images : clic -> lightbox
-    document.querySelectorAll('.js-img').forEach(el => {
+    // clic -> openMedia (tout ce qui a .js-open)
+    document.querySelectorAll('.js-open').forEach(el => {
       el.addEventListener('click', (ev) => {
-        // éviter que cliquer dans un textarea de l'ikigai déclenche la lightbox
         if(ev.target && (ev.target.tagName === 'TEXTAREA')) return;
-
-        const src = el.getAttribute('data-img') || (el.tagName === 'IMG' ? el.getAttribute('src') : null);
-        const title = el.getAttribute('data-title') || "IMAGE";
-        if(src) openImg(src, title);
+        const src = el.getAttribute('data-src') || (el.tagName === 'IMG' ? el.getAttribute('src') : null);
+        const title = el.getAttribute('data-title') || "DOCUMENT";
+        if(src) openMedia(src, title);
       });
     });
 
@@ -1048,72 +965,22 @@
       modalOverlay.setAttribute('aria-hidden','false');
     }
 
-    /* TXIK TXAK : calcul QF (uniquement basé sur la formule affichée + barèmes visibles) */
-    const rfrTotal = document.getElementById('rfrTotal');
-    const parts = document.getElementById('parts');
-    const qfResult = document.getElementById('qfResult');
-
-    function fmtInt(n){
-      return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(n);
-    }
-
-    function updateQF(){
-      const r = Number(rfrTotal?.value);
-      const p = Number(parts?.value);
-
-      if(!qfResult) return;
-
-      if(!rfrTotal?.value || !parts?.value || isNaN(r) || isNaN(p) || p <= 0 || r < 0){
-        qfResult.innerHTML = `
-          <span class="chip"><i class="fa-solid fa-calculator"></i> QF : —</span>
-          <span class="chip"><i class="fa-solid fa-user"></i> Profil : —</span>
-          <span class="chip"><i class="fa-solid fa-percent"></i> Réduction : —</span>
-        `;
-        return;
-      }
-
-      const qf = r / p;
-
-      // Barèmes visibles sur l'infographie fournie
-      let profil = "À vérifier";
-      let reduc = "—";
-
-      if(qf < 430){
-        profil = "Solidaire+";
-        reduc = "jusqu'à 75%";
-      }else if(qf >= 431 && qf <= 620){
-        profil = "Solidaire";
-        reduc = "jusqu'à 50%";
-      }else{
-        profil = "Hors barèmes affichés";
-        reduc = "voir conditions";
-      }
-
-      qfResult.innerHTML = `
-        <span class="chip"><i class="fa-solid fa-calculator"></i> QF : ${fmtInt(qf)}€</span>
-        <span class="chip"><i class="fa-solid fa-user"></i> Profil : ${profil}</span>
-        <span class="chip"><i class="fa-solid fa-percent"></i> Réduction : ${reduc}</span>
-      `;
-    }
-
-    rfrTotal?.addEventListener('input', updateQF);
-    parts?.addEventListener('input', updateQF);
-
     /* CLAVIER */
     document.addEventListener('keydown', (e) => {
       if(e.key === "ArrowDown") scrollSlide(1);
       if(e.key === "ArrowUp") scrollSlide(-1);
       if(e.key === "Escape"){
         closeModal();
-        closeImg();
+        closeMedia();
       }
       if(e.key === "+" || e.key === "=") zoomImg(0.15);
       if(e.key === "-") zoomImg(-0.15);
     });
 
-    /* Bonus : zoom à la molette sur l'image (quand la lightbox est ouverte) */
+    /* Zoom molette uniquement si image */
     document.getElementById('imgStage').addEventListener('wheel', (e) => {
       if(!imgOverlay.classList.contains('active')) return;
+      if(imgViewer.style.display === "none") return; // PDF
       e.preventDefault();
       zoomImg(e.deltaY > 0 ? -0.08 : 0.08);
     }, { passive: false });
